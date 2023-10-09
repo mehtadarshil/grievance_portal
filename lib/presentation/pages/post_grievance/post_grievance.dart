@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grievance_portal/app/routes/route_list.dart';
 import 'package:grievance_portal/gen/assets.gen.dart';
 import 'package:grievance_portal/presentation/pages/post_grievance/controller/post_grievance_controller.dart';
 import 'package:grievance_portal/presentation/widgets/back_handler.dart';
@@ -76,7 +77,13 @@ class PostGrievancePage extends GetView<PostGrievanceController> {
                 size: 30,
                 color: AppColors.textColor.withOpacity(0.3),
               ),
-              onTap: () {},
+              onTap: () {
+                if (controller.tempDepartmentId.isNotEmpty) {
+                  controller.selectedDepartmentId.value =
+                      controller.tempDepartmentId;
+                }
+                Get.toNamed(RouteList.departmentPage);
+              },
               onChange: (value) {
                 controller.isValidCheck();
               },
@@ -111,7 +118,7 @@ class PostGrievancePage extends GetView<PostGrievanceController> {
                   text: "Submit".tr,
                   onTap: controller.isValid.value
                       ? () {
-                          Get.back();
+                          controller.postGrievance();
                         }
                       : () {},
                 ),
