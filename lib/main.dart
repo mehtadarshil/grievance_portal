@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:grievance_portal/app/core/transalations.dart';
+import 'package:grievance_portal/app/routes/bindings/core_binding.dart';
 import 'package:grievance_portal/app/routes/route_list.dart';
 import 'package:grievance_portal/app/routes/routes.dart';
 import 'app/di/app_base_component.dart';
@@ -11,7 +12,7 @@ import 'utils/appcolors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  GetStorage.init();
+  await GetStorage.init();
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -46,6 +47,7 @@ class MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       getPages: Routes.getRoutes(),
       initialRoute: RouteList.homePage,
+      initialBinding: CoreBinding(),
       builder: (context, widget) {
         return DefaultTextStyle(
           style: TextStyle(color: AppColors.textColor),

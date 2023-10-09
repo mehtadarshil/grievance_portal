@@ -3,11 +3,16 @@ import 'package:grievance_portal/gen/fonts.gen.dart';
 
 class CommonButton extends StatelessWidget {
   const CommonButton(
-      {super.key, required this.text, required this.onTap, this.color});
+      {super.key,
+      required this.text,
+      required this.onTap,
+      this.color,
+      this.textColor});
 
   final String text;
   final VoidCallback onTap;
   final Color? color;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +25,10 @@ class CommonButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10))),
         child: Text(
           text,
-          style: const TextStyle(
-              fontFamily: FontFamily.urbanistBold, fontSize: 18),
+          style: TextStyle(
+              fontFamily: FontFamily.urbanistBold,
+              fontSize: 18,
+              color: textColor),
         ));
   }
 }

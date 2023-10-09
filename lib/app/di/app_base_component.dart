@@ -7,6 +7,8 @@ class AppComponentBase {
   final StreamController<bool> _progressDialogStreamController =
       StreamController.broadcast();
 
+  bool loading = false;
+
   Stream<bool> get progressDialogStream =>
       _progressDialogStreamController.stream;
 
@@ -20,9 +22,15 @@ class AppComponentBase {
 //    await SharedPreference.instance.initPreference();
   }
 
-  void showProgressDialog() => _progressDialogStreamController.sink.add(true);
+  void showProgressDialog() {
+    _progressDialogStreamController.sink.add(true);
+    loading = true;
+  }
 
-  void hideProgressDialog() => _progressDialogStreamController.sink.add(false);
+  void hideProgressDialog() {
+    _progressDialogStreamController.sink.add(false);
+    loading = false;
+  }
 
   void dispose() {
     _progressDialogStreamController.close();

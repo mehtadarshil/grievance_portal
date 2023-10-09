@@ -17,8 +17,17 @@ class $AssetsImagesGen {
   /// File path: assets/images/Shape 2.svg
   SvgGenImage get shape2 => const SvgGenImage('assets/images/Shape 2.svg');
 
+  /// File path: assets/images/Shape.svg
+  SvgGenImage get shape => const SvgGenImage('assets/images/Shape.svg');
+
+  /// File path: assets/images/checkmark.svg
+  SvgGenImage get checkmark => const SvgGenImage('assets/images/checkmark.svg');
+
   /// File path: assets/images/clock.png
   AssetGenImage get clock => const AssetGenImage('assets/images/clock.png');
+
+  /// File path: assets/images/close.svg
+  SvgGenImage get close => const SvgGenImage('assets/images/close.svg');
 
   /// File path: assets/images/documentation.png
   AssetGenImage get documentation =>
@@ -26,6 +35,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/key.png
   AssetGenImage get key => const AssetGenImage('assets/images/key.png');
+
+  /// File path: assets/images/login.png
+  AssetGenImage get login => const AssetGenImage('assets/images/login.png');
 
   /// File path: assets/images/on_boarding_image.png
   AssetGenImage get onBoardingImage =>
@@ -35,9 +47,24 @@ class $AssetsImagesGen {
   AssetGenImage get paperPlane =>
       const AssetGenImage('assets/images/paper-plane.png');
 
+  /// File path: assets/images/upload_image.png
+  AssetGenImage get uploadImage =>
+      const AssetGenImage('assets/images/upload_image.png');
+
   /// List of all assets
-  List<dynamic> get values =>
-      [shape2, clock, documentation, key, onBoardingImage, paperPlane];
+  List<dynamic> get values => [
+        shape2,
+        shape,
+        checkmark,
+        clock,
+        close,
+        documentation,
+        key,
+        login,
+        onBoardingImage,
+        paperPlane,
+        uploadImage
+      ];
 }
 
 class $AssetsStringsGen {

@@ -1,1 +1,3 @@
-class DialogUtil {}
+class DialogUtil {
+  static void verifiedDialog() {}
+}

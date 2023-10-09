@@ -11,7 +11,21 @@ class Strings {
           "Please click on the below buttons to post/track grievance.",
       "Post_Grievance": "Post Grievance",
       "Track_Grievance": "Track Grievance",
-      "Total_Grievance": "Total Grievance"
+      "Total_Grievance": "Total Grievance",
+      "Name": "Name",
+      "Enter_here": "Enter here",
+      "Department": "Department",
+      "Select": "- Select -",
+      "Address": "Address",
+      "Search_google_address": "Search google address",
+      "Grievance_Details": "Grievance Details",
+      "Message": "Message…",
+      "Submit": "Submit",
+      "Back": "Back",
+      "Log_In": "Log In",
+      "Phone_Number": "Phone Number",
+      "Verify_your_Mobile_Number":
+          "Verify your Mobile Number and post your grievance.*"
     },
     "or": {
       "no_internet": "କ internet ଣସି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ |",
