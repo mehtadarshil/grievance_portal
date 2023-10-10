@@ -2,12 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide FormData, MultipartFile;
-import 'package:get_storage/get_storage.dart';
 import 'package:grievance_portal/app/core/api_client.dart';
 import 'package:grievance_portal/app/core/api_const.dart';
 import 'package:grievance_portal/app/models/department_model.dart';
 import 'package:grievance_portal/app/models/post_grievance_model.dart';
-import 'package:grievance_portal/utils/dbkeys.dart';
+import 'package:grievance_portal/utils/dialog_util.dart';
 import 'package:grievance_portal/utils/logger.dart';
 
 class PostGrievanceController extends GetxController {
@@ -34,8 +33,7 @@ class PostGrievanceController extends GetxController {
         departmentController.text.trim().isEmpty ||
         addressController.text.trim().isEmpty ||
         messageController.text.trim().isEmpty ||
-        file.value == null ||
-        isValid.isTrue) {
+        file.value == null) {
       isValid(false);
     } else if (isValid.isFalse) {
       isValid(true);
@@ -48,6 +46,7 @@ class PostGrievanceController extends GetxController {
     if (pickedFile != null) {
       file.value = pickedFile.files.first;
       Logger.prints(file.value?.name);
+      isValidCheck();
     }
   }
 
@@ -64,7 +63,7 @@ class PostGrievanceController extends GetxController {
 
   void postGrievance() async {
     FormData formData = FormData.fromMap({
-      ApiConst.userId: GetStorage().read(DbKeys.userId),
+      ApiConst.userId: 1,
       ApiConst.customerName: nameController.text,
       ApiConst.departmentId: tempDepartmentId,
       ApiConst.requestDescription: messageController.text,
@@ -79,6 +78,9 @@ class PostGrievanceController extends GetxController {
     if (postGrievanceJson != null) {
       PostGrievanceModel postGrievanceModel =
           PostGrievanceModel.fromJson(postGrievanceJson);
+      if (postGrievanceModel.status!) {
+        DialogUtil.postGrievanceThankYouDialog();
+      }
     }
   }
 }

@@ -6,6 +6,7 @@ import 'package:grievance_portal/app/core/api_const.dart';
 import 'package:grievance_portal/app/models/user_data.dart';
 import 'package:grievance_portal/app/models/user_details.dart';
 import 'package:grievance_portal/utils/dbkeys.dart';
+import 'package:grievance_portal/utils/dialog_util.dart';
 
 class LogInController extends GetxController {
   final ApiClient _apiClient = Get.find();
@@ -26,7 +27,9 @@ class LogInController extends GetxController {
             formData: {ApiConst.mobileno: numberController.text});
         if (loginJson != null) {
           UserDetails userDetails = UserDetails.fromJson(loginJson);
-          GetStorage().write(DbKeys.userId, userDetails.data?.first.idUser);
+          await GetStorage()
+              .write(DbKeys.userId, userDetails.data?.first.idUser);
+          DialogUtil.verifiedDialog();
         }
       }
     }

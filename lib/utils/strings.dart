@@ -24,8 +24,18 @@ class Strings {
       "Back": "Back",
       "Log_In": "Log In",
       "Phone_Number": "Phone Number",
+      "Verified": "Verified",
+      "You_have_successfully_verified_the":
+          "You have successfully verified the",
       "Verify_your_Mobile_Number":
-          "Verify your Mobile Number and post your grievance.*"
+          "Verify your Mobile Number and post your grievance.*",
+      "Go_to_Dashboard": "Go to Dashboard",
+      "Send_Inquiry": "Send Inquiry",
+      "Thank_You": "Thank You",
+      "Submitting_your_grievances":
+          "Submitting your grievances. We will get back to you as soon as possible.",
+      "Grievance_List": "Grievance List",
+      "Add_New_Grievances": "+ Add New Grievances"
     },
     "or": {
       "no_internet": "କ internet ଣସି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ |",

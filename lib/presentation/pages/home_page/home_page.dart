@@ -19,7 +19,6 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return backHanlder(
       child: Scaffold(
-        key: controller.scaffoldKey,
         backgroundColor: AppColors.bgColor,
         appBar: CommonAppbar(title: "GRIEVANCE_PORTAL".tr),
         body: SingleChildScrollView(
@@ -30,7 +29,13 @@ class HomePage extends GetView<HomeController> {
                   Expanded(
                       child: CommonOutlineButton(
                           onTap: () {
-                            Get.toNamed(RouteList.dashboard);
+                            var userid = GetStorage().read(DbKeys.userId);
+                            if (userid == null ||
+                                userid.toString().trim().isEmpty) {
+                              Get.toNamed(RouteList.logInPage);
+                            } else {
+                              Get.toNamed(RouteList.dashboard);
+                            }
                           },
                           text: "Home".tr)),
                   const SizedBox(

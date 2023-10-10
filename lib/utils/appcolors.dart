@@ -11,4 +11,6 @@ class AppColors {
   static Color secondCardColor = const Color(0xffF2F8FF);
   static Color thirdCardColor = const Color(0xffFFF7F6);
   static Color fourthCardColor = const Color(0xffFFF7EC);
+  static Color greenColor = const Color(0xff02C30B);
+  static Color headerColor = const Color(0xffF1F1F1);
 }

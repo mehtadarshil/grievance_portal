@@ -49,6 +49,7 @@ class PostGrievancePage extends GetView<PostGrievanceController> {
                           GestureDetector(
                             onTap: () {
                               controller.file.value = null;
+                              controller.isValidCheck();
                             },
                             child: Container(
                                 color: Colors.transparent,

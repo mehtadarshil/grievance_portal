@@ -20,8 +20,13 @@ class $AssetsImagesGen {
   /// File path: assets/images/Shape.svg
   SvgGenImage get shape => const SvgGenImage('assets/images/Shape.svg');
 
-  /// File path: assets/images/checkmark.svg
-  SvgGenImage get checkmark => const SvgGenImage('assets/images/checkmark.svg');
+  /// File path: assets/images/action_icon.svg
+  SvgGenImage get actionIcon =>
+      const SvgGenImage('assets/images/action_icon.svg');
+
+  /// File path: assets/images/checkmark.png
+  AssetGenImage get checkmark =>
+      const AssetGenImage('assets/images/checkmark.png');
 
   /// File path: assets/images/clock.png
   AssetGenImage get clock => const AssetGenImage('assets/images/clock.png');
@@ -55,6 +60,7 @@ class $AssetsImagesGen {
   List<dynamic> get values => [
         shape2,
         shape,
+        actionIcon,
         checkmark,
         clock,
         close,

@@ -12,6 +12,7 @@ class DepartmentPage extends GetView<PostGrievanceController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       appBar: CommonAppbar(title: "Department".tr),
       body: Obx(
         () => controller.departmentModel.value != null
@@ -64,7 +65,7 @@ class DepartmentPage extends GetView<PostGrievanceController> {
           controller.tempDepartmentId = controller.selectedDepartmentId.value;
           Get.back();
         },
-      ),
+      ).paddingSymmetric(horizontal: 20, vertical: 33),
     );
   }
 }

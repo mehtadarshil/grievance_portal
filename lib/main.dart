@@ -85,7 +85,9 @@ class MyAppState extends State<MyApp> {
                   stream: AppComponentBase.instance.progressDialogStream,
                   builder: (context, snapshot) {
                     if (snapshot.data ?? false) {
-                      return const Center(child: CustomProgressDialog());
+                      return Container(
+                          color: Colors.black.withOpacity(0.4),
+                          child: const Center(child: CustomProgressDialog()));
                     } else {
                       return const Offstage();
                     }

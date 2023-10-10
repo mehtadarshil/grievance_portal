@@ -6,6 +6,8 @@ class ApiConst {
   static const wsGetUserDetailsByMobile = "getuserdetailsbymobile";
   static const wsGetDepartments = 'getdepartments';
   static const wsSaveGrievanceRequest = "savegrievancerequest";
+  static const wsGetTotalRequestsByUser = "gettotalrequestsbyuser";
+  static const wsGetUserGrievanceList = "getusergrievancelist";
 
   //const tags
   static const authorization = "Authorization";

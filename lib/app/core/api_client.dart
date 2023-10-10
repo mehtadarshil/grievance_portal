@@ -55,7 +55,7 @@ class ApiClient {
           'Basic ${base64.encode(utf8.encode('$username:$password'))}';
       Map<String, String> rawHeader = {
         ApiConst.authorization: basicAuth,
-        ApiConst.apiKey: ApiConst.apiKeyValue
+        ApiConst.apiKey: ApiConst.apiKeyValue,
       };
 
       if (headers != null) {
