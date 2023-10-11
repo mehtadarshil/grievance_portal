@@ -1,14 +1,13 @@
 // To parse this JSON data, do
 //
-//     final grievanceDetails = grievanceDetailsFromJson(jsonString);
+//     final temperatures = temperaturesFromJson(jsonString);
 
 import 'dart:convert';
 
-GrievanceDetails grievanceDetailsFromJson(String str) =>
+GrievanceDetails temperaturesFromJson(String str) =>
     GrievanceDetails.fromJson(json.decode(str));
 
-String grievanceDetailsToJson(GrievanceDetails data) =>
-    json.encode(data.toJson());
+String temperaturesToJson(GrievanceDetails data) => json.encode(data.toJson());
 
 class GrievanceDetails {
   final int? code;
@@ -60,8 +59,8 @@ class Datum {
   final String? customerName;
   final String? address;
   final List<RequestStatusArray>? requestStatusArray;
-  final List<dynamic>? latestRequestEmailstatusArray;
-  final List<dynamic>? requestEmailstatusArray;
+  final List<LatestRequestEmailstatusArray>? latestRequestEmailstatusArray;
+  final List<RequestEmailstatusArray>? requestEmailstatusArray;
   final List<RequestFileArray>? requestFileArray;
 
   Datum({
@@ -111,12 +110,14 @@ class Datum {
         latestRequestEmailstatusArray:
             json["latest_request_emailstatus_array"] == null
                 ? []
-                : List<dynamic>.from(
-                    json["latest_request_emailstatus_array"]!.map((x) => x)),
+                : List<LatestRequestEmailstatusArray>.from(
+                    json["latest_request_emailstatus_array"]!
+                        .map((x) => LatestRequestEmailstatusArray.fromJson(x))),
         requestEmailstatusArray: json["request_emailstatus_array"] == null
             ? []
-            : List<dynamic>.from(
-                json["request_emailstatus_array"]!.map((x) => x)),
+            : List<RequestEmailstatusArray>.from(
+                json["request_emailstatus_array"]!
+                    .map((x) => RequestEmailstatusArray.fromJson(x))),
         requestFileArray: json["request_file_array"] == null
             ? []
             : List<RequestFileArray>.from(json["request_file_array"]!
@@ -140,43 +141,26 @@ class Datum {
         "request_status_array": requestStatusArray == null
             ? []
             : List<dynamic>.from(requestStatusArray!.map((x) => x.toJson())),
-        "latest_request_emailstatus_array": latestRequestEmailstatusArray ==
-                null
-            ? []
-            : List<dynamic>.from(latestRequestEmailstatusArray!.map((x) => x)),
+        "latest_request_emailstatus_array":
+            latestRequestEmailstatusArray == null
+                ? []
+                : List<dynamic>.from(
+                    latestRequestEmailstatusArray!.map((x) => x.toJson())),
         "request_emailstatus_array": requestEmailstatusArray == null
             ? []
-            : List<dynamic>.from(requestEmailstatusArray!.map((x) => x)),
+            : List<dynamic>.from(
+                requestEmailstatusArray!.map((x) => x.toJson())),
         "request_file_array": requestFileArray == null
             ? []
             : List<dynamic>.from(requestFileArray!.map((x) => x.toJson())),
       };
 }
 
-class RequestFileArray {
-  final String? requestImageId;
-  final String? requestImageName;
-  final String? requestImagePath;
+RequestStatusArray requestStatusArrayFromJson(String str) =>
+    RequestStatusArray.fromJson(json.decode(str));
 
-  RequestFileArray({
-    this.requestImageId,
-    this.requestImageName,
-    this.requestImagePath,
-  });
-
-  factory RequestFileArray.fromJson(Map<String, dynamic> json) =>
-      RequestFileArray(
-        requestImageId: json["request_image_id"],
-        requestImageName: json["request_image_name"],
-        requestImagePath: json["request_image_path"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "request_image_id": requestImageId,
-        "request_image_name": requestImageName,
-        "request_image_path": requestImagePath,
-      };
-}
+String requestStatusArrayToJson(RequestStatusArray data) =>
+    json.encode(data.toJson());
 
 class RequestStatusArray {
   final String? idStatusHistory;
@@ -270,5 +254,103 @@ class RequestStatusArray {
         "created_by": createdBy,
         "created_on": createdOn?.toIso8601String(),
         "status": status,
+      };
+}
+
+class LatestRequestEmailstatusArray {
+  final String? idEmailHistory;
+  final String? emailRespondUserStatus;
+  final DateTime? createdOn;
+
+  LatestRequestEmailstatusArray({
+    this.idEmailHistory,
+    this.emailRespondUserStatus,
+    this.createdOn,
+  });
+
+  factory LatestRequestEmailstatusArray.fromJson(Map<String, dynamic> json) =>
+      LatestRequestEmailstatusArray(
+        idEmailHistory: json["id_email_history"],
+        emailRespondUserStatus: json["email_respond_user_status"],
+        createdOn: json["created_on"] == null
+            ? null
+            : DateTime.parse(json["created_on"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id_email_history": idEmailHistory,
+        "email_respond_user_status": emailRespondUserStatus,
+        "created_on": createdOn?.toIso8601String(),
+      };
+}
+
+class RequestEmailstatusArray {
+  final String? idEmailHistory;
+  final String? subject;
+  final String? emailStatusRemarks;
+  final String? isViewed;
+  final String? fromUser;
+  final String? toUser;
+  final String? sendBy;
+  final DateTime? createdOn;
+
+  RequestEmailstatusArray({
+    this.idEmailHistory,
+    this.subject,
+    this.emailStatusRemarks,
+    this.isViewed,
+    this.fromUser,
+    this.toUser,
+    this.sendBy,
+    this.createdOn,
+  });
+
+  factory RequestEmailstatusArray.fromJson(Map<String, dynamic> json) =>
+      RequestEmailstatusArray(
+        idEmailHistory: json["id_email_history"],
+        subject: json["subject"],
+        emailStatusRemarks: json["email_status_remarks"],
+        isViewed: json["is_viewed"],
+        fromUser: json["from_user"],
+        toUser: json["send_by"],
+        createdOn: json["created_on"] == null
+            ? null
+            : DateTime.parse(json["created_on"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id_email_history": idEmailHistory,
+        "subject": subject,
+        "email_status_remarks": emailStatusRemarks,
+        "is_viewed": isViewed,
+        "from_user": fromUser,
+        "to_user": toUser,
+        "send_by": sendBy,
+        "created_on": createdOn?.toIso8601String(),
+      };
+}
+
+class RequestFileArray {
+  final String? requestImageId;
+  final String? requestImageName;
+  final String? requestImagePath;
+
+  RequestFileArray({
+    this.requestImageId,
+    this.requestImageName,
+    this.requestImagePath,
+  });
+
+  factory RequestFileArray.fromJson(Map<String, dynamic> json) =>
+      RequestFileArray(
+        requestImageId: json["request_image_id"],
+        requestImageName: json["request_image_name"],
+        requestImagePath: json["request_image_path"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "request_image_id": requestImageId,
+        "request_image_name": requestImageName,
+        "request_image_path": requestImagePath,
       };
 }

@@ -7,12 +7,14 @@ class CommonButton extends StatelessWidget {
       required this.text,
       required this.onTap,
       this.color,
-      this.textColor});
+      this.textColor,
+      this.fontSize});
 
   final String text;
   final VoidCallback onTap;
   final Color? color;
   final Color? textColor;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class CommonButton extends StatelessWidget {
           text,
           style: TextStyle(
               fontFamily: FontFamily.urbanistBold,
-              fontSize: 18,
+              fontSize: fontSize ?? 18,
               color: textColor),
         ));
   }

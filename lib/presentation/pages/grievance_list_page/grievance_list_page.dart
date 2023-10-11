@@ -4,6 +4,7 @@ import 'package:grievance_portal/gen/assets.gen.dart';
 import 'package:grievance_portal/gen/fonts.gen.dart';
 import 'package:grievance_portal/presentation/pages/grievance_list_page/controller/grievance_list_controller.dart';
 import 'package:grievance_portal/presentation/widgets/common_appbar.dart';
+import 'package:grievance_portal/presentation/widgets/common_button.dart';
 import 'package:grievance_portal/utils/appcolors.dart';
 
 class GrievanceListPage extends GetView<GrievanceListController> {
@@ -40,20 +41,6 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                             color: AppColors.textColor.withOpacity(0.5)),
                       )),
                       DataCell(Text(
-                        detail.customerName ?? "",
-                        style: TextStyle(
-                            fontFamily: FontFamily.urbanistMedium,
-                            fontSize: 10,
-                            color: AppColors.textColor.withOpacity(0.5)),
-                      )),
-                      DataCell(Text(
-                        detail.address ?? "",
-                        style: TextStyle(
-                            fontFamily: FontFamily.urbanistMedium,
-                            fontSize: 10,
-                            color: AppColors.textColor.withOpacity(0.5)),
-                      )),
-                      DataCell(Text(
                         detail.departmentNames ?? "",
                         style: TextStyle(
                             fontFamily: FontFamily.urbanistMedium,
@@ -67,33 +54,38 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                             fontSize: 10,
                             color: AppColors.textColor.withOpacity(0.5)),
                       )),
-                      DataCell(Text(
-                        detail.status ?? "",
-                        style: TextStyle(
-                            fontFamily: FontFamily.urbanistMedium,
+                      DataCell(detail.requestStatus == "1"
+                          ? Text(
+                              detail.status ?? "",
+                              style: TextStyle(
+                                  fontFamily: FontFamily.urbanistMedium,
+                                  fontSize: 10,
+                                  color: AppColors.textColor.withOpacity(0.5)),
+                            )
+                          : SizedBox(
+                              width: 150,
+                              height: 20,
+                              child: CommonButton(
+                                  fontSize: 10,
+                                  onTap: () {},
+                                  text: "View Complete Updates"),
+                            )),
+                      DataCell(SizedBox(
+                        width: 120,
+                        height: 20,
+                        child: CommonButton(
                             fontSize: 10,
-                            color: AppColors.textColor.withOpacity(0.5)),
+                            onTap: () {},
+                            color: AppColors.primaryRedColor,
+                            text: "View All Emails"),
                       )),
-                      DataCell(Text(
-                        detail.requestStatusArray?.first.isTransferred ?? "",
-                        style: TextStyle(
-                            fontFamily: FontFamily.urbanistMedium,
-                            fontSize: 10,
-                            color: AppColors.textColor.withOpacity(0.5)),
-                      )),
-                      DataCell(Text(
-                        detail.requestStatusArray?.first.grievanceAssignedTo ??
-                            "",
-                        style: TextStyle(
-                            fontFamily: FontFamily.urbanistMedium,
-                            fontSize: 10,
-                            color: AppColors.textColor.withOpacity(0.5)),
-                      )),
-                      DataCell(Column(
-                        children: [
-                          Assets.images.actionIcon.svg(height: 16, width: 4),
-                        ],
-                      )),
+                      DataCell(
+                        Column(
+                          children: [
+                            Assets.images.actionIcon.svg(height: 16, width: 4),
+                          ],
+                        ),
+                      ),
                     ]));
                   }
                   return SingleChildScrollView(
@@ -117,22 +109,6 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                             DataColumn(
                                 label: Text(
                               "Grievance ID",
-                              style: TextStyle(
-                                fontFamily: FontFamily.urbanistMedium,
-                                fontSize: 10,
-                              ),
-                            )),
-                            DataColumn(
-                                label: Text(
-                              "Customer",
-                              style: TextStyle(
-                                fontFamily: FontFamily.urbanistMedium,
-                                fontSize: 10,
-                              ),
-                            )),
-                            DataColumn(
-                                label: Text(
-                              "Address",
                               style: TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
                                 fontSize: 10,
@@ -164,15 +140,7 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                             )),
                             DataColumn(
                                 label: Text(
-                              "Transfer Status",
-                              style: TextStyle(
-                                fontFamily: FontFamily.urbanistMedium,
-                                fontSize: 10,
-                              ),
-                            )),
-                            DataColumn(
-                                label: Text(
-                              "Assign To",
+                              "Message Updates",
                               style: TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
                                 fontSize: 10,
