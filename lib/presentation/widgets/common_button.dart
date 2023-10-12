@@ -8,13 +8,15 @@ class CommonButton extends StatelessWidget {
       required this.onTap,
       this.color,
       this.textColor,
-      this.fontSize});
+      this.fontSize,
+      this.maxlines});
 
   final String text;
   final VoidCallback onTap;
   final Color? color;
   final Color? textColor;
   final double? fontSize;
+  final int? maxlines;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,8 @@ class CommonButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10))),
         child: Text(
           text,
+          textAlign: TextAlign.center,
+          maxLines: maxlines,
           style: TextStyle(
               fontFamily: FontFamily.urbanistBold,
               fontSize: fontSize ?? 18,

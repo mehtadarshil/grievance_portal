@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grievance_portal/gen/assets.gen.dart';
 import 'package:grievance_portal/gen/fonts.gen.dart';
 import 'package:grievance_portal/presentation/pages/grievance_list_page/controller/grievance_list_controller.dart';
 import 'package:grievance_portal/presentation/widgets/common_appbar.dart';
@@ -63,26 +62,58 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                                   color: AppColors.textColor.withOpacity(0.5)),
                             )
                           : SizedBox(
-                              width: 150,
-                              height: 20,
+                              width: 110,
+                              height: 32,
                               child: CommonButton(
                                   fontSize: 10,
                                   onTap: () {},
+                                  maxlines: 2,
                                   text: "View Complete Updates"),
                             )),
                       DataCell(SizedBox(
-                        width: 120,
-                        height: 20,
+                        width: 75,
+                        height: 32,
                         child: CommonButton(
                             fontSize: 10,
                             onTap: () {},
+                            maxlines: 2,
                             color: AppColors.primaryRedColor,
                             text: "View All Emails"),
                       )),
                       DataCell(
                         Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Assets.images.actionIcon.svg(height: 16, width: 4),
+                            SizedBox(
+                              width: 100,
+                              height: 20,
+                              child: CommonButton(
+                                  fontSize: 10,
+                                  onTap: () {},
+                                  maxlines: 2,
+                                  color: AppColors.primaryRedColor,
+                                  text: "View Details"),
+                            ),
+                            if (detail
+                                .latestRequestEmailstatusArray!.isNotEmpty)
+                              SizedBox(
+                                width: 90,
+                                height: 20,
+                                child: CommonButton(
+                                    fontSize: 10,
+                                    onTap: () {},
+                                    maxlines: 2,
+                                    color: detail.latestRequestEmailstatusArray
+                                                ?.first.idEmailHistory ==
+                                            "10"
+                                        ? AppColors.primaryRedColor
+                                        : AppColors.primaryBlueColor,
+                                    text: detail.latestRequestEmailstatusArray
+                                                ?.first.idEmailHistory ==
+                                            "10"
+                                        ? "Respond"
+                                        : "Responded"),
+                              ).paddingOnly(top: 5)
                           ],
                         ),
                       ),
@@ -93,7 +124,7 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                       scrollDirection: Axis.horizontal,
                       child: DataTable(
                           headingRowHeight: 29,
-                          dataRowHeight: 25,
+                          dataRowHeight: 50,
                           columnSpacing: 20,
                           headingRowColor:
                               MaterialStatePropertyAll(AppColors.headerColor),
