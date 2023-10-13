@@ -35,7 +35,27 @@ class Strings {
       "Submitting_your_grievances":
           "Submitting your grievances. We will get back to you as soon as possible.",
       "Grievance_List": "Grievance List",
-      "Add_New_Grievances": "+ Add New Grievances"
+      "Grievance_History": "Grievance History",
+      "Status": "Status",
+      "Date_Created": "Date Created",
+      "Remark": "Remark",
+      "Email_History": "Email History",
+      "From_Admin_to_You": "From Admin to You",
+      "From_You_to_Admin": "From You to Admin",
+      "Subject": "Subject",
+      "Enter_your_subject": "Enter Your Subject",
+      "Enter_your_message": "Enter Your Message",
+      "Message_field": "Message",
+      "Grievence_Details": "Grievence Details",
+      "Request_Id": "Request Id",
+      "Customer_Name": "Customer Name",
+      "Description": "Description",
+      "Send": "Send",
+      "Close": "Close",
+      "Failed": "Failed",
+      "enter_proper_message": "Enter proper message",
+      "enter_proper_subject": "Enter proper subject",
+      "Message_sent_successfully": "Message sent successfully"
     },
     "or": {
       "no_internet": "କ internet ଣସି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ |",

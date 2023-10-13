@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grievance_portal/gen/fonts.gen.dart';
 import 'package:grievance_portal/presentation/pages/grievance_list_page/controller/grievance_list_controller.dart';
+import 'package:grievance_portal/presentation/pages/grievance_list_page/send_message_page.dart';
 import 'package:grievance_portal/presentation/widgets/common_appbar.dart';
 import 'package:grievance_portal/presentation/widgets/common_button.dart';
 import 'package:grievance_portal/utils/appcolors.dart';
@@ -61,21 +62,40 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                                   fontSize: 10,
                                   color: AppColors.textColor.withOpacity(0.5)),
                             )
-                          : SizedBox(
-                              width: 110,
-                              height: 32,
-                              child: CommonButton(
-                                  fontSize: 10,
-                                  onTap: () {},
-                                  maxlines: 2,
-                                  text: "View Complete Updates"),
+                          : Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  detail.status ?? "",
+                                  style: TextStyle(
+                                      fontFamily: FontFamily.urbanistMedium,
+                                      fontSize: 10,
+                                      color:
+                                          AppColors.textColor.withOpacity(0.5)),
+                                ).paddingOnly(bottom: 5),
+                                SizedBox(
+                                  width: 110,
+                                  height: 32,
+                                  child: CommonButton(
+                                      fontSize: 10,
+                                      onTap: () {
+                                        controller.getGrievenceHistory(
+                                            detail.idRequest!);
+                                      },
+                                      maxlines: 2,
+                                      text: "View Complete Updates"),
+                                ),
+                              ],
                             )),
                       DataCell(SizedBox(
                         width: 75,
                         height: 32,
                         child: CommonButton(
                             fontSize: 10,
-                            onTap: () {},
+                            onTap: () {
+                              controller.getGrievenceEmailHistory(
+                                  grievenceId: detail.idRequest!);
+                            },
                             maxlines: 2,
                             color: AppColors.primaryRedColor,
                             text: "View All Emails"),
@@ -89,7 +109,10 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                               height: 20,
                               child: CommonButton(
                                   fontSize: 10,
-                                  onTap: () {},
+                                  onTap: () {
+                                    controller.getDetailedGrievence(
+                                        grievenceId: detail.idRequest!);
+                                  },
                                   maxlines: 2,
                                   color: AppColors.primaryRedColor,
                                   text: "View Details"),
@@ -101,7 +124,10 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                                 height: 20,
                                 child: CommonButton(
                                     fontSize: 10,
-                                    onTap: () {},
+                                    onTap: () {
+                                      Get.to(() => const SendMessagePage(),
+                                          arguments: detail.idRequest);
+                                    },
                                     maxlines: 2,
                                     color: detail.latestRequestEmailstatusArray
                                                 ?.first.idEmailHistory ==
@@ -124,7 +150,7 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                       scrollDirection: Axis.horizontal,
                       child: DataTable(
                           headingRowHeight: 29,
-                          dataRowHeight: 50,
+                          dataRowHeight: 60,
                           columnSpacing: 20,
                           headingRowColor:
                               MaterialStatePropertyAll(AppColors.headerColor),

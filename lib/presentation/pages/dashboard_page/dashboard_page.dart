@@ -47,7 +47,9 @@ class DashboardPage extends GetView<DashboardController> {
               color: AppColors.secondCardColor,
             ),
             DashboardCard(
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(RouteList.grievanceListPage);
+              },
               title: "Track_Grievance".tr,
               image: Assets.images.key,
               color: AppColors.thirdCardColor,

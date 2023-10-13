@@ -20,6 +20,16 @@ class DialogUtil {
       builder: (context) => const PostGrievanceThankYouDialog(),
     );
   }
+
+  static void customDialog({required String title, bool? error}) {
+    showDialog(
+      context: Get.context!,
+      builder: (context) => CustomDialogWidget(
+        title: title,
+        error: error ?? false,
+      ),
+    );
+  }
 }
 
 class VerifiedDialog extends StatelessWidget {
@@ -128,6 +138,62 @@ class PostGrievanceThankYouDialog extends StatelessWidget {
                 text: "Go_to_Dashboard".tr,
                 onTap: () {
                   Get.offAllNamed(RouteList.dashboard);
+                },
+              )
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class CustomDialogWidget extends StatelessWidget {
+  const CustomDialogWidget(
+      {super.key, required this.title, this.error = false});
+
+  final String title;
+  final bool error;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 41, vertical: 33),
+          decoration: BoxDecoration(
+              color: AppColors.whiteColor,
+              borderRadius: BorderRadius.circular(25)),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                error ? "Failed".tr : "Thank_You".tr,
+                style: const TextStyle(
+                    fontFamily: FontFamily.urbanistExtraBold, fontSize: 26),
+              ),
+              if (!error)
+                const SizedBox(
+                  height: 61,
+                ),
+              if (!error)
+                Assets.images.checkmark
+                    .image(color: AppColors.greenColor, height: 80, width: 80),
+              const SizedBox(
+                height: 37,
+              ),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontFamily: FontFamily.urbanistRegular, fontSize: 16),
+              ).paddingOnly(bottom: 60),
+              CommonButton(
+                text: "Close".tr,
+                onTap: () {
+                  Get.back();
                 },
               )
             ],

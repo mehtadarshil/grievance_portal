@@ -83,7 +83,14 @@ class HomePage extends GetView<HomeController> {
               ),
               CommonButton(
                 text: "Track_Grievance".tr,
-                onTap: () {},
+                onTap: () {
+                  var userid = GetStorage().read(DbKeys.userId);
+                  if (userid == null || userid.toString().trim().isEmpty) {
+                    Get.toNamed(RouteList.logInPage);
+                  } else {
+                    Get.toNamed(RouteList.grievanceListPage);
+                  }
+                },
                 color: AppColors.primaryRedColor,
               ).paddingSymmetric(horizontal: 20),
             ],

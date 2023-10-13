@@ -8,6 +8,12 @@ class ApiConst {
   static const wsSaveGrievanceRequest = "savegrievancerequest";
   static const wsGetTotalRequestsByUser = "gettotalrequestsbyuser";
   static const wsGetUserGrievanceList = "getusergrievancelist";
+  static const wsGetGrievanceHistoryByGrievanceid =
+      "getgrievancehistorybygrievanceid";
+  static const wsGetGrievanceEmailHistoryByUser =
+      "getgrievanceemailhistorybyuser";
+  static const wsGetGrievanceDetailsById = "getgrievancedetailsbyid";
+  static const wsSendUserGrievanceMessage = "sendusergrievancemessage";
 
   //const tags
   static const authorization = "Authorization";
@@ -19,4 +25,7 @@ class ApiConst {
   static const requestDescription = "request_description";
   static const address = "address";
   static const requestFile = "request_file";
+  static const grievanceId = "grievance_id";
+  static const subject = "subject";
+  static const userMessage = "user_message";
 }

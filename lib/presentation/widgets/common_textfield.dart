@@ -13,15 +13,19 @@ class CommonTextField extends StatelessWidget {
       this.icon,
       this.maxLines,
       this.onChange,
-      this.textInputType});
+      this.textInputType,
+      this.focusNode,
+      this.onTapOutSide});
   final String? title;
   final String hintText;
   final TextEditingController controller;
+  final FocusNode? focusNode;
   final VoidCallback? onTap;
   final TextInputType? textInputType;
   final Widget? icon;
   final int? maxLines;
   final Function(String value)? onChange;
+  final Function(PointerDownEvent)? onTapOutSide;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +44,8 @@ class CommonTextField extends StatelessWidget {
         TextField(
           controller: controller,
           onTap: onTap,
+          onTapOutside: onTapOutSide,
+          focusNode: focusNode,
           keyboardType: textInputType,
           onChanged: onChange,
           readOnly: onTap != null,

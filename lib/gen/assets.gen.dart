@@ -38,6 +38,14 @@ class $AssetsImagesGen {
   AssetGenImage get documentation =>
       const AssetGenImage('assets/images/documentation.png');
 
+  /// File path: assets/images/ic_app_logo.png
+  AssetGenImage get icAppLogo =>
+      const AssetGenImage('assets/images/ic_app_logo.png');
+
+  /// File path: assets/images/ic_back_icon.png
+  AssetGenImage get icBackIcon =>
+      const AssetGenImage('assets/images/ic_back_icon.png');
+
   /// File path: assets/images/key.png
   AssetGenImage get key => const AssetGenImage('assets/images/key.png');
 
@@ -65,6 +73,8 @@ class $AssetsImagesGen {
         clock,
         close,
         documentation,
+        icAppLogo,
+        icBackIcon,
         key,
         login,
         onBoardingImage,
@@ -206,8 +216,6 @@ class SvgGenImage {
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      theme: theme,
-      colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
       clipBehavior: clipBehavior,
