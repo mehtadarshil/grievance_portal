@@ -55,7 +55,9 @@ class Strings {
       "Failed": "Failed",
       "enter_proper_message": "Enter proper message",
       "enter_proper_subject": "Enter proper subject",
-      "Message_sent_successfully": "Message sent successfully"
+      "Message_sent_successfully": "Message sent successfully",
+      "Log_out": "Log Out",
+      "AreYouSureYouWantToLogOut": "Are you sure want to Log Out ?"
     },
     "or": {
       "no_internet": "କ internet ଣସି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ |",

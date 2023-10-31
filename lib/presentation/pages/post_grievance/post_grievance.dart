@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_places_autocomplete_flutter/google_places_autocomplete_flutter.dart';
 import 'package:grievance_portal/app/routes/route_list.dart';
 import 'package:grievance_portal/gen/assets.gen.dart';
+import 'package:grievance_portal/gen/fonts.gen.dart';
 import 'package:grievance_portal/presentation/pages/post_grievance/controller/post_grievance_controller.dart';
 import 'package:grievance_portal/presentation/widgets/back_handler.dart';
 import 'package:grievance_portal/presentation/widgets/common_appbar.dart';
@@ -19,7 +21,9 @@ class PostGrievancePage extends GetView<PostGrievanceController> {
       backgroundColor: AppColors.bgColor,
       appBar: CommonAppbar(
         title: "Post_Grievance".tr,
-        onLeadingTap: () {},
+        onLeadingTap: () {
+          Get.offAllNamed(RouteList.dashboard);
+        },
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -89,20 +93,61 @@ class PostGrievancePage extends GetView<PostGrievanceController> {
                 controller.isValidCheck();
               },
             ).paddingOnly(bottom: 32),
-            CommonTextField(
-              controller: controller.addressController,
-              hintText: 'Search_google_address'.tr,
-              title: "Address".tr,
-              onChange: (value) {
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Opacity(
+                opacity: 0.6,
+                child: Text(
+                  "Location".tr,
+                  style: const TextStyle(
+                      fontFamily: FontFamily.urbanistMedium, fontSize: 16),
+                ),
+              ).paddingOnly(bottom: 11),
+            ),
+            GooglePlaceAutoCompleteFlutterTextField(
+              textEditingController: controller.addressController,
+              googleAPIKey: "AIzaSyAa2DDyBCbm_HxtxGGGm367ao_NrSHOiFc",
+              debounceTime: 300,
+              inputDecoration: InputDecoration(
+                  filled: true,
+                  hintText: 'Search_google_address'.tr,
+                  suffixIcon: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Assets.images.shape.svg(height: 18, width: 18),
+                    ],
+                  ),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 21, vertical: 20),
+                  hintStyle: TextStyle(
+                      fontFamily: FontFamily.urbanistMedium,
+                      fontSize: 16,
+                      color: AppColors.textColor),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none),
+                  errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none),
+                  disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none),
+                  focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none),
+                  fillColor: AppColors.whiteColor),
+              itmClick: (postalCodeResponse) {
+                controller.addressController.text =
+                    postalCodeResponse.description ?? "";
                 controller.isValidCheck();
               },
-              icon: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Assets.images.shape.svg(height: 18, width: 18),
-                ],
-              ),
-            ).paddingOnly(bottom: 32),
+            ).paddingOnly(bottom: 22),
             CommonTextField(
               controller: controller.messageController,
               hintText: 'Message'.tr,

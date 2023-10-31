@@ -32,10 +32,8 @@ class PostGrievanceController extends GetxController {
 
   void isValidCheck() {
     if (nameController.text.trim().isEmpty ||
-        departmentController.text.trim().isEmpty ||
         addressController.text.trim().isEmpty ||
-        messageController.text.trim().isEmpty ||
-        file.value == null) {
+        messageController.text.trim().isEmpty) {
       isValid(false);
     } else if (isValid.isFalse) {
       isValid(true);
@@ -64,17 +62,28 @@ class PostGrievanceController extends GetxController {
   }
 
   void postGrievance() async {
-    FormData formData = FormData.fromMap({
-      ApiConst.userId: GetStorage().read(DbKeys.userId),
-      ApiConst.customerName: nameController.text,
-      ApiConst.departmentId: tempDepartmentId,
-      ApiConst.requestDescription: messageController.text,
-      ApiConst.address: addressController.text,
-    });
-    formData.files.add(MapEntry(
-        ApiConst.requestFile,
-        await MultipartFile.fromFile(file.value!.path!,
-            filename: file.value?.name ?? "")));
+    FormData formData =
+        FormData.fromMap(departmentController.text.trim().isEmpty
+            ? {
+                ApiConst.userId: GetStorage().read(DbKeys.userId),
+                ApiConst.customerName: nameController.text,
+                ApiConst.requestDescription: messageController.text,
+                ApiConst.address: addressController.text,
+              }
+            : {
+                ApiConst.userId: GetStorage().read(DbKeys.userId),
+                ApiConst.customerName: nameController.text,
+                ApiConst.departmentId: tempDepartmentId,
+                ApiConst.requestDescription: messageController.text,
+                ApiConst.address: addressController.text,
+              });
+    if (file.value != null) {
+      formData.files.add(MapEntry(
+          ApiConst.requestFile,
+          await MultipartFile.fromFile(file.value!.path!,
+              filename: file.value?.name ?? "")));
+    }
+
     var postGrievanceJson = await _apiClient.post(
         path: ApiConst.wsSaveGrievanceRequest, formData: formData);
     if (postGrievanceJson != null) {

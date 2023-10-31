@@ -21,6 +21,7 @@ class LogInController extends GetxController {
       UserData userData = UserData.fromJson(registerJson);
       if (userData.status!) {
         GetStorage().write(DbKeys.userId, userData.data?.userId);
+        DialogUtil.verifiedDialog();
       } else {
         var loginJson = await _apiClient.put(
             path: ApiConst.wsGetUserDetailsByMobile,

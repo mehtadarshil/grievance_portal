@@ -21,6 +21,41 @@ class DialogUtil {
     );
   }
 
+  static void confirmationDialog(
+          {required VoidCallback onConfirm, String? title}) =>
+      showDialog(
+        context: Get.context!,
+        builder: (context) => AlertDialog(
+          title: Text(
+            title ?? "delete_title".tr,
+            style: const TextStyle(
+                fontFamily: FontFamily.urbanistMedium, fontSize: 14),
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text(
+                  "cancel".tr,
+                  style: TextStyle(
+                      fontFamily: FontFamily.urbanistSemiBold,
+                      fontSize: 12,
+                      color: AppColors.primaryBlueColor),
+                )),
+            TextButton(
+                onPressed: onConfirm,
+                child: Text(
+                  "confirm".tr,
+                  style: TextStyle(
+                      fontFamily: FontFamily.urbanistSemiBold,
+                      fontSize: 12,
+                      color: AppColors.primaryRedColor),
+                ))
+          ],
+        ),
+      );
+
   static void customDialog({required String title, bool? error}) {
     showDialog(
       context: Get.context!,

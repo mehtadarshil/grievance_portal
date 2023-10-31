@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:grievance_portal/app/routes/route_list.dart';
 import 'package:grievance_portal/gen/assets.gen.dart';
 import 'package:grievance_portal/presentation/pages/dashboard_page/controller/dashboard_controller.dart';
@@ -7,6 +8,8 @@ import 'package:grievance_portal/presentation/widgets/back_handler.dart';
 import 'package:grievance_portal/presentation/widgets/common_appbar.dart';
 import 'package:grievance_portal/presentation/widgets/dashboard_card.dart';
 import 'package:grievance_portal/utils/appcolors.dart';
+import 'package:grievance_portal/utils/dbkeys.dart';
+import 'package:grievance_portal/utils/dialog_util.dart';
 import 'package:intl/intl.dart';
 
 class DashboardPage extends GetView<DashboardController> {
@@ -18,7 +21,6 @@ class DashboardPage extends GetView<DashboardController> {
       child: Scaffold(
         appBar: CommonAppbar(
           title: "Dashboard".tr,
-          onLeadingTap: () {},
         ),
         body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 20),
@@ -67,7 +69,21 @@ class DashboardPage extends GetView<DashboardController> {
                 image: Assets.images.documentation,
                 color: AppColors.fourthCardColor,
               ),
-            )
+            ),
+            DashboardCard(
+              onTap: () async {
+                DialogUtil.confirmationDialog(
+                  title: "AreYouSureYouWantToLogOut".tr,
+                  onConfirm: () async {
+                    await GetStorage().write(DbKeys.userId, null);
+                    Get.offAllNamed(RouteList.homePage);
+                  },
+                );
+              },
+              title: "Log_out".tr,
+              image: Assets.images.logout,
+              color: AppColors.firstCardColor,
+            ),
           ],
         ),
       ),

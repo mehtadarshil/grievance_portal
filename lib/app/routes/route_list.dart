@@ -5,4 +5,5 @@ class RouteList {
   static const logInPage = '/logInPage';
   static const departmentPage = '/departmentPage';
   static const grievanceListPage = '/grievanceListPage';
+  static const aboutUsPage = "/aboutUsPage";
 }

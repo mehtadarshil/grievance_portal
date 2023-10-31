@@ -6,6 +6,7 @@ import 'package:grievance_portal/app/routes/bindings/home_binding.dart';
 import 'package:grievance_portal/app/routes/bindings/log_in_bindings.dart';
 import 'package:grievance_portal/app/routes/bindings/post_grievance_binding.dart';
 import 'package:grievance_portal/app/routes/route_list.dart';
+import 'package:grievance_portal/presentation/pages/about_us_page/about_us_page.dart';
 import 'package:grievance_portal/presentation/pages/dashboard_page/dashboard_page.dart';
 import 'package:grievance_portal/presentation/pages/department_page/department_page.dart';
 import 'package:grievance_portal/presentation/pages/grievance_list_page/grievance_list_page.dart';
@@ -39,6 +40,10 @@ class Routes {
             name: RouteList.grievanceListPage,
             page: const GrievanceListPage(),
             bindings: GrievanceListBindings()),
+        getPage(
+          name: RouteList.aboutUsPage,
+          page: const AboutUsPage(),
+        ),
       ];
 }
 

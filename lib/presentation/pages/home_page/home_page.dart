@@ -34,7 +34,7 @@ class HomePage extends GetView<HomeController> {
                                 userid.toString().trim().isEmpty) {
                               Get.toNamed(RouteList.logInPage);
                             } else {
-                              Get.toNamed(RouteList.dashboard);
+                              Get.offAllNamed(RouteList.dashboard);
                             }
                           },
                           text: "Home".tr)),
@@ -42,8 +42,11 @@ class HomePage extends GetView<HomeController> {
                     width: 14,
                   ),
                   Expanded(
-                      child:
-                          CommonOutlineButton(onTap: () {}, text: "About".tr))
+                      child: CommonOutlineButton(
+                          onTap: () {
+                            Get.toNamed(RouteList.aboutUsPage);
+                          },
+                          text: "About".tr))
                 ],
               ).paddingSymmetric(horizontal: 31, vertical: 21),
               ClipRRect(
