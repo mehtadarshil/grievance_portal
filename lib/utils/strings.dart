@@ -57,7 +57,9 @@ class Strings {
       "enter_proper_subject": "Enter proper subject",
       "Message_sent_successfully": "Message sent successfully",
       "Log_out": "Log Out",
-      "AreYouSureYouWantToLogOut": "Are you sure want to Log Out ?"
+      "AreYouSureYouWantToLogOut": "Are you sure want to Log Out ?",
+      "Image": "Image",
+      "Send_Message": "Send Message"
     },
     "or": {
       "no_internet": "କ internet ଣସି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ |",

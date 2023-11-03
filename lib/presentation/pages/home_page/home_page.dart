@@ -11,6 +11,7 @@ import 'package:grievance_portal/presentation/widgets/common_button.dart';
 import 'package:grievance_portal/presentation/widgets/common_outline_button.dart';
 import 'package:grievance_portal/utils/appcolors.dart';
 import 'package:grievance_portal/utils/dbkeys.dart';
+import 'package:grievance_portal/utils/dialog_util.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({super.key});
@@ -85,13 +86,26 @@ class HomePage extends GetView<HomeController> {
                 height: 12,
               ),
               CommonButton(
-                text: "Track_Grievance".tr,
+                text: GetStorage().read(DbKeys.userId) == null ||
+                        GetStorage()
+                            .read(DbKeys.userId)
+                            .toString()
+                            .trim()
+                            .isEmpty
+                    ? "Log_In".tr
+                    : "Log_out".tr,
                 onTap: () {
                   var userid = GetStorage().read(DbKeys.userId);
                   if (userid == null || userid.toString().trim().isEmpty) {
                     Get.toNamed(RouteList.logInPage);
                   } else {
-                    Get.toNamed(RouteList.grievanceListPage);
+                    DialogUtil.confirmationDialog(
+                      title: "AreYouSureYouWantToLogOut".tr,
+                      onConfirm: () async {
+                        await GetStorage().write(DbKeys.userId, null);
+                        Get.offAllNamed(RouteList.homePage);
+                      },
+                    );
                   }
                 },
                 color: AppColors.primaryRedColor,

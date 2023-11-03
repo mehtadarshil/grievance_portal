@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grievance_portal/gen/fonts.gen.dart';
 import 'package:grievance_portal/presentation/pages/grievance_list_page/controller/grievance_list_controller.dart';
+import 'package:grievance_portal/presentation/pages/grievance_list_page/full_screen_image_viewer.dart';
 import 'package:grievance_portal/presentation/pages/grievance_list_page/send_message_page.dart';
 import 'package:grievance_portal/presentation/widgets/common_appbar.dart';
 import 'package:grievance_portal/presentation/widgets/common_button.dart';
@@ -27,40 +28,60 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                     var detail = controller.grievanceDetails.value!.data![i];
                     data.add(DataRow(cells: [
                       DataCell(Text(
-                        i.toString(),
+                        (i + 1).toString(),
                         style: TextStyle(
                             fontFamily: FontFamily.urbanistMedium,
-                            fontSize: 10,
-                            color: AppColors.textColor.withOpacity(0.5)),
+                            fontSize: 12,
+                            color: AppColors.textColor),
                       )),
                       DataCell(Text(
                         detail.uniqueRequestId ?? "",
                         style: TextStyle(
                             fontFamily: FontFamily.urbanistMedium,
-                            fontSize: 10,
-                            color: AppColors.textColor.withOpacity(0.5)),
+                            fontSize: 12,
+                            color: AppColors.textColor),
+                      )),
+                      DataCell(Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (detail.requestFileArray!.isNotEmpty)
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(() => FullScreenImageViewer(
+                                    url: detail.requestFileArray!.first
+                                        .requestImagePath!
+                                        .replaceAll(" ", "")));
+                              },
+                              child: Image.network(
+                                detail.requestFileArray!.first.requestImagePath!
+                                    .replaceAll(" ", ""),
+                                height: 50,
+                                width: 50,
+                              ),
+                            )
+                        ],
                       )),
                       DataCell(Text(
                         detail.departmentNames ?? "",
                         style: TextStyle(
                             fontFamily: FontFamily.urbanistMedium,
-                            fontSize: 10,
-                            color: AppColors.textColor.withOpacity(0.5)),
+                            fontSize: 12,
+                            color: AppColors.textColor),
                       )),
                       DataCell(Text(
                         detail.requestDescription ?? "",
                         style: TextStyle(
                             fontFamily: FontFamily.urbanistMedium,
-                            fontSize: 10,
-                            color: AppColors.textColor.withOpacity(0.5)),
+                            fontSize: 12,
+                            color: AppColors.textColor),
                       )),
                       DataCell(detail.requestStatus == "1"
                           ? Text(
                               detail.status ?? "",
                               style: TextStyle(
                                   fontFamily: FontFamily.urbanistMedium,
-                                  fontSize: 10,
-                                  color: AppColors.textColor.withOpacity(0.5)),
+                                  fontSize: 12,
+                                  color: AppColors.textColor),
                             )
                           : Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -69,9 +90,8 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                                   detail.status ?? "",
                                   style: TextStyle(
                                       fontFamily: FontFamily.urbanistMedium,
-                                      fontSize: 10,
-                                      color:
-                                          AppColors.textColor.withOpacity(0.5)),
+                                      fontSize: 12,
+                                      color: AppColors.textColor),
                                 ).paddingOnly(bottom: 5),
                                 SizedBox(
                                   width: 110,
@@ -126,7 +146,10 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                                     fontSize: 10,
                                     onTap: () {
                                       Get.to(() => const SendMessagePage(),
-                                          arguments: detail.idRequest);
+                                              arguments: detail.idRequest)!
+                                          .then((value) {
+                                        controller.getGrievanceList();
+                                      });
                                     },
                                     maxlines: 2,
                                     color: detail.latestRequestEmailstatusArray
@@ -160,7 +183,7 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                               "Si",
                               style: TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
-                                fontSize: 10,
+                                fontSize: 12,
                               ),
                             )),
                             DataColumn(
@@ -168,7 +191,15 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                               "Grievance ID",
                               style: TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
-                                fontSize: 10,
+                                fontSize: 12,
+                              ),
+                            )),
+                            DataColumn(
+                                label: Text(
+                              "Requested File",
+                              style: TextStyle(
+                                fontFamily: FontFamily.urbanistMedium,
+                                fontSize: 12,
                               ),
                             )),
                             DataColumn(
@@ -176,7 +207,7 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                               "Department",
                               style: TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
-                                fontSize: 10,
+                                fontSize: 12,
                               ),
                             )),
                             DataColumn(
@@ -184,7 +215,7 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                               "Descriprion",
                               style: TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
-                                fontSize: 10,
+                                fontSize: 12,
                               ),
                             )),
                             DataColumn(
@@ -192,7 +223,7 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                               "Status",
                               style: TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
-                                fontSize: 10,
+                                fontSize: 12,
                               ),
                             )),
                             DataColumn(
@@ -200,7 +231,7 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                               "Message Updates",
                               style: TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
-                                fontSize: 10,
+                                fontSize: 12,
                               ),
                             )),
                             DataColumn(
@@ -208,7 +239,7 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                               "Action",
                               style: TextStyle(
                                 fontFamily: FontFamily.urbanistMedium,
-                                fontSize: 10,
+                                fontSize: 12,
                               ),
                             )),
                           ],

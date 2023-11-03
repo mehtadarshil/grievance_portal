@@ -34,7 +34,12 @@ class SendMessageController extends GetxController {
         SendMessageModel sendMessageModel =
             SendMessageModel.fromJson(sendMessageJson);
         if (sendMessageModel.status!) {
-          DialogUtil.customDialog(title: "Message_sent_successfully".tr);
+          DialogUtil.customDialog(
+            title: "Message_sent_successfully".tr,
+            onDone: () {
+              Get.close(2);
+            },
+          );
         } else {
           DialogUtil.customDialog(title: "Failed".tr, error: true);
         }

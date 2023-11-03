@@ -16,7 +16,7 @@ class SendMessagePage extends GetView<SendMessageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CommonAppbar(title: "title"),
+        appBar: CommonAppbar(title: "Send_Message".tr),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

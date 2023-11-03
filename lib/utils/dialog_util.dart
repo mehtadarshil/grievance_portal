@@ -29,7 +29,7 @@ class DialogUtil {
           title: Text(
             title ?? "delete_title".tr,
             style: const TextStyle(
-                fontFamily: FontFamily.urbanistMedium, fontSize: 14),
+                fontFamily: FontFamily.urbanistMedium, fontSize: 16),
           ),
           actions: [
             TextButton(
@@ -40,7 +40,7 @@ class DialogUtil {
                   "cancel".tr,
                   style: TextStyle(
                       fontFamily: FontFamily.urbanistSemiBold,
-                      fontSize: 12,
+                      fontSize: 16,
                       color: AppColors.primaryBlueColor),
                 )),
             TextButton(
@@ -49,20 +49,19 @@ class DialogUtil {
                   "confirm".tr,
                   style: TextStyle(
                       fontFamily: FontFamily.urbanistSemiBold,
-                      fontSize: 12,
+                      fontSize: 16,
                       color: AppColors.primaryRedColor),
                 ))
           ],
         ),
       );
 
-  static void customDialog({required String title, bool? error}) {
+  static void customDialog(
+      {required String title, bool? error, VoidCallback? onDone}) {
     showDialog(
       context: Get.context!,
       builder: (context) => CustomDialogWidget(
-        title: title,
-        error: error ?? false,
-      ),
+          title: title, error: error ?? false, onDone: onDone),
     );
   }
 }
@@ -185,10 +184,11 @@ class PostGrievanceThankYouDialog extends StatelessWidget {
 
 class CustomDialogWidget extends StatelessWidget {
   const CustomDialogWidget(
-      {super.key, required this.title, this.error = false});
+      {super.key, required this.title, this.error = false, this.onDone});
 
   final String title;
   final bool error;
+  final VoidCallback? onDone;
 
   @override
   Widget build(BuildContext context) {
@@ -227,9 +227,10 @@ class CustomDialogWidget extends StatelessWidget {
               ).paddingOnly(bottom: 60),
               CommonButton(
                 text: "Close".tr,
-                onTap: () {
-                  Get.back();
-                },
+                onTap: onDone ??
+                    () {
+                      Get.back();
+                    },
               )
             ],
           ),
