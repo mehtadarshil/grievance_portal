@@ -13,6 +13,8 @@ import 'package:grievance_portal/presentation/pages/grievance_list_page/grievanc
 import 'package:grievance_portal/presentation/pages/home_page/home_page.dart';
 import 'package:grievance_portal/presentation/pages/log_in_page/log_in_page.dart';
 import 'package:grievance_portal/presentation/pages/post_grievance/post_grievance.dart';
+import 'package:grievance_portal/presentation/pages/village_page/village_page.dart';
+import 'package:grievance_portal/presentation/pages/ward_page/ward_page.dart';
 
 class Routes {
   static List<GetPage<dynamic>> getRoutes() => [
@@ -43,6 +45,14 @@ class Routes {
         getPage(
           name: RouteList.aboutUsPage,
           page: const AboutUsPage(),
+        ),
+        getPage(
+          name: RouteList.wardPage,
+          page: const WardPage(),
+        ),
+        getPage(
+          name: RouteList.villagePage,
+          page: const VillagePage(),
         ),
       ];
 }

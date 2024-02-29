@@ -5,6 +5,8 @@ class ApiConst {
   static const wsRegisteruser = "registeruser";
   static const wsGetUserDetailsByMobile = "getuserdetailsbymobile";
   static const wsGetDepartments = 'getdepartments';
+  static const wsGetgpWards = "getgpwards";
+  static const wsGetVillageBygpWard = "getvillagebygpward";
   static const wsSaveGrievanceRequest = "savegrievancerequest";
   static const wsGetTotalRequestsByUser = "gettotalrequestsbyuser";
   static const wsGetUserGrievanceList = "getusergrievancelist";
@@ -28,4 +30,6 @@ class ApiConst {
   static const grievanceId = "grievance_id";
   static const subject = "subject";
   static const userMessage = "user_message";
+  static const gpwardId = "gpward_id";
+  static const villageId = "village_id";
 }

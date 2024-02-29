@@ -25,7 +25,9 @@ class GrievanceListController extends GetxController {
   void getGrievanceList() async {
     var grievanceListJson = await _apiClient.put(
         path: ApiConst.wsGetUserGrievanceList,
-        formData: {ApiConst.userId: GetStorage().read(DbKeys.userId)});
+        formData: {
+          ApiConst.userId: GetStorage().read(DbKeys.userId).toString()
+        });
     if (grievanceListJson != null) {
       grievanceDetails.value = GrievanceDetails.fromJson(grievanceListJson);
     }

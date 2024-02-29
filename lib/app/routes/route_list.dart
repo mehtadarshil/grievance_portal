@@ -6,4 +6,6 @@ class RouteList {
   static const departmentPage = '/departmentPage';
   static const grievanceListPage = '/grievanceListPage';
   static const aboutUsPage = "/aboutUsPage";
+  static const wardPage = "/wardPage";
+  static const villagePage = "/villagePage";
 }

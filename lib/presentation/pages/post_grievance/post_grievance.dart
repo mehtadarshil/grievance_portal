@@ -93,6 +93,44 @@ class PostGrievancePage extends GetView<PostGrievanceController> {
                 controller.isValidCheck();
               },
             ).paddingOnly(bottom: 32),
+            CommonTextField(
+              controller: controller.wardController,
+              hintText: 'Select'.tr,
+              title: "Select_GPWard".tr,
+              icon: Icon(
+                Icons.arrow_drop_down_rounded,
+                size: 30,
+                color: AppColors.textColor.withOpacity(0.3),
+              ),
+              onTap: () {
+                if (controller.tempWardId.isNotEmpty) {
+                  controller.selectedWardId.value = controller.tempWardId;
+                }
+                Get.toNamed(RouteList.wardPage);
+              },
+              onChange: (value) {
+                controller.isValidCheck();
+              },
+            ).paddingOnly(bottom: 32),
+            CommonTextField(
+              controller: controller.villageController,
+              hintText: 'Select'.tr,
+              title: "Select_Village".tr,
+              icon: Icon(
+                Icons.arrow_drop_down_rounded,
+                size: 30,
+                color: AppColors.textColor.withOpacity(0.3),
+              ),
+              onTap: () {
+                if (controller.tempVillageId.isNotEmpty) {
+                  controller.selectedVillageId.value = controller.tempVillageId;
+                }
+                Get.toNamed(RouteList.villagePage);
+              },
+              onChange: (value) {
+                controller.isValidCheck();
+              },
+            ).paddingOnly(bottom: 32),
             Align(
               alignment: Alignment.centerLeft,
               child: Opacity(

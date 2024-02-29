@@ -59,7 +59,9 @@ class Strings {
       "Log_out": "Log Out",
       "AreYouSureYouWantToLogOut": "Are you sure want to Log Out ?",
       "Image": "Image",
-      "Send_Message": "Send Message"
+      "Send_Message": "Send Message",
+      "Select_GPWard": "GP/Ward",
+      "Select_Village": "Village"
     },
     "or": {
       "no_internet": "କ internet ଣସି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ |",
