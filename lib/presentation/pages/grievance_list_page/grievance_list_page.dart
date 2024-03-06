@@ -5,6 +5,7 @@ import 'package:grievance_portal/presentation/pages/grievance_list_page/controll
 import 'package:grievance_portal/presentation/pages/grievance_list_page/full_screen_image_viewer.dart';
 import 'package:grievance_portal/presentation/pages/grievance_list_page/re_open_grievance.dart';
 import 'package:grievance_portal/presentation/pages/grievance_list_page/send_message_page.dart';
+import 'package:grievance_portal/presentation/pages/grievance_list_page/your_feedback_page.dart';
 import 'package:grievance_portal/presentation/widgets/common_appbar.dart';
 import 'package:grievance_portal/presentation/widgets/common_button.dart';
 import 'package:grievance_portal/utils/appcolors.dart';
@@ -233,9 +234,27 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                                     height: 20,
                                     child: CommonButton(
                                       text: "ReOpen",
+                                      color: AppColors.primaryRedColor,
                                       fontSize: 10,
                                       onTap: () {
                                         Get.to(() => const ReOpenGrievance(),
+                                                arguments: detail)!
+                                            .then((value) {
+                                          controller.getGrievanceList();
+                                        });
+                                      },
+                                      maxlines: 2,
+                                    ),
+                                  ).paddingOnly(top: 5),
+                                  SizedBox(
+                                    width: 110,
+                                    height: 20,
+                                    child: CommonButton(
+                                      text: "Your Feedback",
+                                      color: AppColors.primaryBlueColor,
+                                      fontSize: 10,
+                                      onTap: () {
+                                        Get.to(() => const YourFeedBackPage(),
                                                 arguments: detail)!
                                             .then((value) {
                                           controller.getGrievanceList();

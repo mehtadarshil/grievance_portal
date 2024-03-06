@@ -62,7 +62,10 @@ class Strings {
       "Send_Message": "Send Message",
       "Select_GPWard": "GP/Ward",
       "Select_Village": "Village",
-      "Please_enter_reopen_reason": "Please Enter Reopen Reason"
+      "Please_enter_reopen_reason": "Please Enter Reopen Reason",
+      "Send_us_your_feedback": "Send Us Your Feedback",
+      "are_you_satisfied": "Are you satisfied with our work?",
+      "please_enter_your_feedback": "Please enter your feedback"
     },
     "or": {
       "no_internet": "କ internet ଣସି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ |",

@@ -17,6 +17,7 @@ class ApiConst {
   static const wsGetGrievanceDetailsById = "getgrievancedetailsbyid";
   static const wsSendUserGrievanceMessage = "sendusergrievancemessage";
   static const wsReopenuserGrievance = "reopenusergrievance";
+  static const wssaveusergrievancefeedback = "saveusergrievancefeedback";
 
   //const tags
   static const authorization = "Authorization";
@@ -37,4 +38,6 @@ class ApiConst {
   static const grievancePreviousStatus = "grievance_previous_status";
   static const reopenDetails = "reopen_details";
   static const requestImage = "request_image";
+  static const isSatisfied = "is_satisfied";
+  static const yourFeedback = "your_feedback";
 }
