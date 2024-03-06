@@ -39,7 +39,7 @@ class Strings {
       "Status": "Status",
       "Date_Created": "Date Created",
       "Remark": "Remark",
-      "Email_History": "Email History",
+      "Email_History": "Messages History",
       "From_Admin_to_You": "From Admin to You",
       "From_You_to_Admin": "From You to Admin",
       "Subject": "Subject",
@@ -61,7 +61,8 @@ class Strings {
       "Image": "Image",
       "Send_Message": "Send Message",
       "Select_GPWard": "GP/Ward",
-      "Select_Village": "Village"
+      "Select_Village": "Village",
+      "Please_enter_reopen_reason": "Please Enter Reopen Reason"
     },
     "or": {
       "no_internet": "କ internet ଣସି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ |",

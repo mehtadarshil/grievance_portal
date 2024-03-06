@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +101,8 @@ class PostGrievanceController extends GetxController {
                 ApiConst.requestDescription: messageController.text,
                 ApiConst.address: addressController.text,
                 ApiConst.gpwardId: tempWardId,
-                ApiConst.villageId: tempVillageId
+                ApiConst.villageId: tempVillageId,
+                ApiConst.grievanceFromDevice: "App"
               }
             : {
                 ApiConst.userId: GetStorage().read(DbKeys.userId),
@@ -112,9 +111,18 @@ class PostGrievanceController extends GetxController {
                 ApiConst.requestDescription: messageController.text,
                 ApiConst.address: addressController.text,
                 ApiConst.gpwardId: tempWardId,
-                ApiConst.villageId: tempVillageId
+                ApiConst.villageId: tempVillageId,
+                ApiConst.grievanceFromDevice: "App"
               });
-    log(formData.fields.toString());
+    // log({
+    //   ApiConst.userId: GetStorage().read(DbKeys.userId),
+    //   ApiConst.customerName: nameController.text,
+    //   ApiConst.departmentId: tempDepartmentId,
+    //   ApiConst.requestDescription: messageController.text,
+    //   ApiConst.address: addressController.text,
+    //   ApiConst.gpwardId: tempWardId,
+    //   ApiConst.villageId: tempVillageId
+    // }.toString());
     if (file.value != null) {
       formData.files.add(MapEntry(
           ApiConst.requestFile,

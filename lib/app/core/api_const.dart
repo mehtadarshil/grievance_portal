@@ -16,6 +16,7 @@ class ApiConst {
       "getgrievanceemailhistorybyuser";
   static const wsGetGrievanceDetailsById = "getgrievancedetailsbyid";
   static const wsSendUserGrievanceMessage = "sendusergrievancemessage";
+  static const wsReopenuserGrievance = "reopenusergrievance";
 
   //const tags
   static const authorization = "Authorization";
@@ -32,4 +33,8 @@ class ApiConst {
   static const userMessage = "user_message";
   static const gpwardId = "gpward_id";
   static const villageId = "village_id";
+  static const grievanceFromDevice = "grievance_from_device";
+  static const grievancePreviousStatus = "grievance_previous_status";
+  static const reopenDetails = "reopen_details";
+  static const requestImage = "request_image";
 }

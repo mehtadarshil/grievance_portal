@@ -1,30 +1,28 @@
 // To parse this JSON data, do
 //
-//     final postGrievanceModel = postGrievanceModelFromJson(jsonString);
+//     final reOpenModel = reOpenModelFromJson(jsonString);
 
 import 'dart:convert';
 
-PostGrievanceModel postGrievanceModelFromJson(String str) =>
-    PostGrievanceModel.fromJson(json.decode(str));
+ReOpenModel reOpenModelFromJson(String str) =>
+    ReOpenModel.fromJson(json.decode(str));
 
-String postGrievanceModelToJson(PostGrievanceModel data) =>
-    json.encode(data.toJson());
+String reOpenModelToJson(ReOpenModel data) => json.encode(data.toJson());
 
-class PostGrievanceModel {
+class ReOpenModel {
   final int? code;
   final bool? status;
   final Data? data;
   final DateTime? serverTime;
 
-  PostGrievanceModel({
+  ReOpenModel({
     this.code,
     this.status,
     this.data,
     this.serverTime,
   });
 
-  factory PostGrievanceModel.fromJson(Map<String, dynamic> json) =>
-      PostGrievanceModel(
+  factory ReOpenModel.fromJson(Map<String, dynamic> json) => ReOpenModel(
         code: json["code"],
         status: json["status"],
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
@@ -42,17 +40,17 @@ class PostGrievanceModel {
 }
 
 class Data {
-  final String? grievanceId;
+  final String? message;
 
   Data({
-    this.grievanceId,
+    this.message,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        grievanceId: json["grievance_id"],
+        message: json["message"],
       );
 
   Map<String, dynamic> toJson() => {
-        "grievance_id": grievanceId,
+        "message": message,
       };
 }
