@@ -5,7 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:grievance_portal/app/core/api_client.dart';
 import 'package:grievance_portal/app/core/api_const.dart';
 import 'package:grievance_portal/app/di/snackbar_util.dart';
-import 'package:grievance_portal/app/models/reopen_model.dart';
+import 'package:grievance_portal/app/models/feedback_model.dart';
 import 'package:grievance_portal/utils/dbkeys.dart';
 import 'package:grievance_portal/utils/dialog_util.dart';
 
@@ -31,12 +31,15 @@ class YourFeedbackController extends GetxController {
     });
 
     var postGrievanceJson = await _apiClient.post(
-        path: ApiConst.wsReopenuserGrievance, formData: formData);
+        path: ApiConst.wssaveusergrievancefeedback, formData: formData);
     if (postGrievanceJson != null) {
-      ReOpenModel postGrievanceModel = ReOpenModel.fromJson(postGrievanceJson);
-      if (postGrievanceModel.status!) {
+      FeedbackModel postGrievanceModel =
+          FeedbackModel.fromJson(postGrievanceJson);
+      if (postGrievanceModel.status! &&
+          postGrievanceModel.data != null &&
+          postGrievanceModel.data!.length == 2) {
         DialogUtil.customDialog(
-          title: postGrievanceModel.data?.message ?? "",
+          title: postGrievanceModel.data?.elementAt(1) ?? "",
           onDone: () {
             Get.close(2);
           },
