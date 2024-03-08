@@ -162,7 +162,7 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                                       .getGrievenceHistory(detail.idRequest!);
                                 },
                                 maxlines: 2,
-                                text: "View Complete Updates"),
+                                text: "View All Updates"),
                           ),
                         ],
                       )),
@@ -226,7 +226,8 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                                         ? "Respond"
                                         : "Responded"),
                               ).paddingOnly(top: 5),
-                            if (detail.status == "Closed")
+                            if (detail.requestStatus == "2" ||
+                                detail.requestStatus == "3")
                               Column(
                                 children: [
                                   SizedBox(
