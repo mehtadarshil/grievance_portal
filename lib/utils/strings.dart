@@ -80,7 +80,10 @@ class Strings {
       "please_enter_last_name": "Please enter Last Name",
       "please_enter_address": "Please enter address",
       "refresh": "Refresh",
-      "your_feedback": "Your Feedback"
+      "your_feedback": "Your Feedback",
+      "disSatisfied": "Dis-Satisfied",
+      "satisfied": "Satisfied",
+      "feedback": "Feedback"
     },
     "or": {
       "no_internet": "କ internet ଣସି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ |",
