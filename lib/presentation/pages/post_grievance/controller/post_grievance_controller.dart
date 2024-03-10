@@ -7,6 +7,7 @@ import 'package:grievance_portal/app/core/api_client.dart';
 import 'package:grievance_portal/app/core/api_const.dart';
 import 'package:grievance_portal/app/di/snackbar_util.dart';
 import 'package:grievance_portal/app/models/department_model.dart';
+import 'package:grievance_portal/app/models/my_profile_model.dart';
 import 'package:grievance_portal/app/models/post_grievance_model.dart';
 import 'package:grievance_portal/app/models/village_model.dart';
 import 'package:grievance_portal/app/models/ward_model.dart';
@@ -41,6 +42,7 @@ class PostGrievanceController extends GetxController {
   void onReady() {
     getDepartments();
     getWardList();
+    getProfileDetails();
     super.onReady();
   }
 
@@ -50,6 +52,20 @@ class PostGrievanceController extends GetxController {
     if (pickedFile != null) {
       file.value = pickedFile.files.first;
       Logger.prints(file.value?.name);
+    }
+  }
+
+  Future getProfileDetails() async {
+    var data = await _apiClient.put(
+        path: ApiConst.wsGetUserDetailsById,
+        formData: {ApiConst.userid: GetStorage().read(DbKeys.userId)});
+    if (data != null) {
+      MyProfileModel myProfileModel = MyProfileModel.fromJson(data);
+      if (myProfileModel.status ?? false) {
+        nameController.text =
+            "${myProfileModel.data?.first.firstName} ${myProfileModel.data?.first.lastName}";
+        addressController.text = myProfileModel.data?.first.address ?? "";
+      }
     }
   }
 
@@ -86,6 +102,9 @@ class PostGrievanceController extends GetxController {
       return;
     } else if (messageController.text.trim().isEmpty) {
       SnackBarUtil.showSnackBar(message: "please_enter_grievance_detail".tr);
+      return;
+    } else if (addressController.text.trim().isEmpty) {
+      SnackBarUtil.showSnackBar(message: "please_enter_address".tr);
       return;
     }
     FormData formData =
