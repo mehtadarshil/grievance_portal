@@ -131,7 +131,8 @@ class PostGrievancePage extends GetView<PostGrievanceController> {
             ),
             GooglePlaceAutoCompleteFlutterTextField(
               textEditingController: controller.addressController,
-              googleAPIKey: "AIzaSyAa2DDyBCbm_HxtxGGGm367ao_NrSHOiFc",
+              googleAPIKey: "",
+              //  "AIzaSyAa2DDyBCbm_HxtxGGGm367ao_NrSHOiFc",
               debounceTime: 300,
               inputDecoration: InputDecoration(
                   filled: true,
