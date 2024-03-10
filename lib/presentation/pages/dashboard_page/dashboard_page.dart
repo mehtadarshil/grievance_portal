@@ -40,6 +40,14 @@ class DashboardPage extends GetView<DashboardController> {
                 }),
             DashboardCard(
               onTap: () {
+                Get.toNamed(RouteList.myProfilePage);
+              },
+              title: "my_profile".tr,
+              image: Assets.images.profile,
+              color: AppColors.secondCardColor,
+            ),
+            DashboardCard(
+              onTap: () {
                 Get.toNamed(RouteList.postGrievancePage)!.then((value) {
                   controller.getTotalGrievance();
                 });

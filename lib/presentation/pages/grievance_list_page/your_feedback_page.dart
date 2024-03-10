@@ -5,6 +5,7 @@ import 'package:grievance_portal/presentation/pages/grievance_list_page/controll
 import 'package:grievance_portal/presentation/widgets/common_appbar.dart';
 import 'package:grievance_portal/presentation/widgets/common_button.dart';
 import 'package:grievance_portal/presentation/widgets/common_textfield.dart';
+import 'package:grievance_portal/utils/appcolors.dart';
 
 class YourFeedBackPage extends GetView<YourFeedbackController> {
   const YourFeedBackPage({super.key});
@@ -80,6 +81,29 @@ class YourFeedBackPage extends GetView<YourFeedbackController> {
               onTap: () {
                 controller.giveFeedback();
               },
+            ).paddingOnly(bottom: 30),
+            Text(
+              "your_feedback".tr,
+              style: const TextStyle(
+                  fontFamily: FontFamily.urbanistSemiBold, fontSize: 20),
+            ),
+            Obx(
+              () => controller.feedbackList.value != null
+                  ? ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: controller.feedbackList.value?.data?.length,
+                      itemBuilder: (context, index) => Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 20),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        decoration: BoxDecoration(
+                            color: AppColors.whiteColor,
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
             )
           ],
         ).paddingSymmetric(horizontal: 16, vertical: 20),

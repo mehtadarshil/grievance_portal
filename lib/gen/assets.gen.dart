@@ -55,6 +55,9 @@ class $AssetsImagesGen {
   AssetGenImage get paperPlane =>
       const AssetGenImage('assets/images/paper-plane.png');
 
+  /// File path: assets/images/profile.png
+  AssetGenImage get profile => const AssetGenImage('assets/images/profile.png');
+
   /// File path: assets/images/upload_image.png
   AssetGenImage get uploadImage =>
       const AssetGenImage('assets/images/upload_image.png');
@@ -73,6 +76,7 @@ class $AssetsImagesGen {
         logout,
         onBoardingImage,
         paperPlane,
+        profile,
         uploadImage
       ];
 }

@@ -53,7 +53,6 @@ class PostGrievancePage extends GetView<PostGrievanceController> {
                           GestureDetector(
                             onTap: () {
                               controller.file.value = null;
-                              controller.isValidCheck();
                             },
                             child: Container(
                                 color: Colors.transparent,
@@ -69,9 +68,6 @@ class PostGrievancePage extends GetView<PostGrievanceController> {
               controller: controller.nameController,
               hintText: 'Enter_here'.tr,
               title: "Name".tr,
-              onChange: (p0) {
-                controller.isValidCheck();
-              },
             ).paddingOnly(bottom: 32),
             CommonTextField(
               controller: controller.departmentController,
@@ -89,9 +85,6 @@ class PostGrievancePage extends GetView<PostGrievanceController> {
                 }
                 Get.toNamed(RouteList.departmentPage);
               },
-              onChange: (value) {
-                controller.isValidCheck();
-              },
             ).paddingOnly(bottom: 32),
             CommonTextField(
               controller: controller.wardController,
@@ -107,9 +100,6 @@ class PostGrievancePage extends GetView<PostGrievanceController> {
                   controller.selectedWardId.value = controller.tempWardId;
                 }
                 Get.toNamed(RouteList.wardPage);
-              },
-              onChange: (value) {
-                controller.isValidCheck();
               },
             ).paddingOnly(bottom: 32),
             CommonTextField(
@@ -127,16 +117,13 @@ class PostGrievancePage extends GetView<PostGrievanceController> {
                 }
                 Get.toNamed(RouteList.villagePage);
               },
-              onChange: (value) {
-                controller.isValidCheck();
-              },
             ).paddingOnly(bottom: 32),
             Align(
               alignment: Alignment.centerLeft,
               child: Opacity(
                 opacity: 0.6,
                 child: Text(
-                  "Location".tr,
+                  "Address".tr,
                   style: const TextStyle(
                       fontFamily: FontFamily.urbanistMedium, fontSize: 16),
                 ),
@@ -148,13 +135,13 @@ class PostGrievancePage extends GetView<PostGrievanceController> {
               debounceTime: 300,
               inputDecoration: InputDecoration(
                   filled: true,
-                  hintText: 'Search_google_address'.tr,
-                  suffixIcon: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Assets.images.shape.svg(height: 18, width: 18),
-                    ],
-                  ),
+                  hintText: 'enter_your_address'.tr,
+                  // suffixIcon: Column(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     Assets.images.shape.svg(height: 18, width: 18),
+                  //   ],
+                  // ),
                   contentPadding:
                       const EdgeInsets.symmetric(horizontal: 21, vertical: 20),
                   hintStyle: TextStyle(
@@ -183,7 +170,6 @@ class PostGrievancePage extends GetView<PostGrievanceController> {
               itmClick: (postalCodeResponse) {
                 controller.addressController.text =
                     postalCodeResponse.description ?? "";
-                controller.isValidCheck();
               },
             ).paddingOnly(bottom: 22),
             CommonTextField(
@@ -191,23 +177,12 @@ class PostGrievancePage extends GetView<PostGrievanceController> {
               hintText: 'Message'.tr,
               title: "Grievance_Details".tr,
               maxLines: 5,
-              onChange: (value) {
-                controller.isValidCheck();
-              },
             ).paddingOnly(bottom: 32),
-            Obx(
-              () => Opacity(
-                opacity: controller.isValid.value ? 1 : 0.5,
-                child: CommonButton(
-                  text: "Submit".tr,
-                  onTap: controller.isValid.value
-                      ? () {
-                          controller.postGrievance();
-                        }
-                      : () {},
-                ),
-              ),
-            )
+            CommonButton(
+                text: "Submit".tr,
+                onTap: () {
+                  controller.postGrievance();
+                })
           ],
         ).paddingSymmetric(horizontal: 20, vertical: 40),
       ),

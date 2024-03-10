@@ -5,6 +5,7 @@ import 'package:get/get.dart' hide FormData, MultipartFile;
 import 'package:get_storage/get_storage.dart';
 import 'package:grievance_portal/app/core/api_client.dart';
 import 'package:grievance_portal/app/core/api_const.dart';
+import 'package:grievance_portal/app/di/snackbar_util.dart';
 import 'package:grievance_portal/app/models/department_model.dart';
 import 'package:grievance_portal/app/models/post_grievance_model.dart';
 import 'package:grievance_portal/app/models/village_model.dart';
@@ -43,25 +44,12 @@ class PostGrievanceController extends GetxController {
     super.onReady();
   }
 
-  void isValidCheck() {
-    if (nameController.text.trim().isEmpty ||
-        addressController.text.trim().isEmpty ||
-        messageController.text.trim().isEmpty ||
-        wardController.text.trim().isEmpty ||
-        villageController.text.trim().isEmpty) {
-      isValid(false);
-    } else if (isValid.isFalse) {
-      isValid(true);
-    }
-  }
-
   void pickUpFile() async {
     var pickedFile = await FilePicker.platform
         .pickFiles(allowMultiple: false, type: FileType.image);
     if (pickedFile != null) {
       file.value = pickedFile.files.first;
       Logger.prints(file.value?.name);
-      isValidCheck();
     }
   }
 
@@ -93,6 +81,13 @@ class PostGrievanceController extends GetxController {
   }
 
   void postGrievance() async {
+    if (nameController.text.trim().isEmpty) {
+      SnackBarUtil.showSnackBar(message: "please_enter_name".tr);
+      return;
+    } else if (messageController.text.trim().isEmpty) {
+      SnackBarUtil.showSnackBar(message: "please_enter_grievance_detail".tr);
+      return;
+    }
     FormData formData =
         FormData.fromMap(departmentController.text.trim().isEmpty
             ? {

@@ -8,4 +8,5 @@ class RouteList {
   static const aboutUsPage = "/aboutUsPage";
   static const wardPage = "/wardPage";
   static const villagePage = "/villagePage";
+  static const myProfilePage = "/myProfilePage";
 }

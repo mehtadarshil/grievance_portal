@@ -110,6 +110,9 @@ class HomePage extends GetView<HomeController> {
                 },
                 color: AppColors.primaryRedColor,
               ).paddingSymmetric(horizontal: 20),
+              const SizedBox(
+                height: 50,
+              )
             ],
           ),
         ),

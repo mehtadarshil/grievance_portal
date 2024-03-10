@@ -68,9 +68,6 @@ class LogInPage extends GetView<LogInController> {
                 Expanded(
                   child: CommonTextField(
                       hintText: "Phone_Number".tr,
-                      onChange: (value) {
-                        controller.isValidCheck();
-                      },
                       textInputType: TextInputType.number,
                       controller: controller.numberController),
                 )
@@ -79,19 +76,11 @@ class LogInPage extends GetView<LogInController> {
             const SizedBox(
               height: 28,
             ),
-            Obx(
-              () => Opacity(
-                opacity: controller.isValid.value ? 1 : 0.5,
-                child: CommonButton(
-                  text: "Submit".tr,
-                  onTap: controller.isValid.value
-                      ? () {
-                          controller.logIn();
-                        }
-                      : () {},
-                ),
-              ),
-            ).paddingOnly(bottom: 26),
+            CommonButton(
+                text: "Submit".tr,
+                onTap: () {
+                  controller.logIn();
+                }).paddingOnly(bottom: 26),
             CommonButton(
               color: Colors.transparent,
               textColor: AppColors.blackColor,

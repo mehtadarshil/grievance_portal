@@ -9,6 +9,7 @@ class CommonAppbar extends AppBar {
       {super.key,
       required String title,
       String? subTitle,
+      List<Widget>? actions,
       VoidCallback? onLeadingTap})
       : super(
           backgroundColor: AppColors.whiteColor,
@@ -50,7 +51,7 @@ class CommonAppbar extends AppBar {
                     width: 40,
                   )
                 ]
-              : null,
+              : actions,
           leading: onLeadingTap != null
               ? GestureDetector(
                   onTap: onLeadingTap,

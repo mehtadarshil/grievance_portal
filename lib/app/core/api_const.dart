@@ -18,12 +18,16 @@ class ApiConst {
   static const wsSendUserGrievanceMessage = "sendusergrievancemessage";
   static const wsReopenuserGrievance = "reopenusergrievance";
   static const wssaveusergrievancefeedback = "saveusergrievancefeedback";
+  static const wsGetUserDetailsById = "getuserdetailsbyid";
+  static const wsUpdateUserInformation = "updateuserinformation";
+  static const wsGetFeedbackbyGrivanceId = "getfeedbackbygrivanceid";
 
   //const tags
   static const authorization = "Authorization";
   static const apiKey = "X-API-KEY";
   static const mobileno = "mobileno";
   static const userId = "user_id";
+  static const userid = "userid";
   static const customerName = "customer_name";
   static const departmentId = "department_id";
   static const requestDescription = "request_description";
@@ -40,4 +44,7 @@ class ApiConst {
   static const requestImage = "request_image";
   static const isSatisfied = "is_satisfied";
   static const yourFeedback = "your_feedback";
+  static const firstName = "first_name";
+  static const lastName = "last_name";
+  static const email = "email";
 }

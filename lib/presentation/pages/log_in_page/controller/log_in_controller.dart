@@ -3,8 +3,10 @@ import 'package:get/get.dart' hide FormData;
 import 'package:get_storage/get_storage.dart';
 import 'package:grievance_portal/app/core/api_client.dart';
 import 'package:grievance_portal/app/core/api_const.dart';
+import 'package:grievance_portal/app/di/snackbar_util.dart';
 import 'package:grievance_portal/app/models/user_data.dart';
 import 'package:grievance_portal/app/models/user_details.dart';
+import 'package:grievance_portal/app/routes/route_list.dart';
 import 'package:grievance_portal/utils/dbkeys.dart';
 import 'package:grievance_portal/utils/dialog_util.dart';
 
@@ -14,6 +16,10 @@ class LogInController extends GetxController {
   RxBool isValid = false.obs;
 
   void logIn() async {
+    if (numberController.text.trim().length != 10) {
+      SnackBarUtil.showSnackBar(message: "please_enter_proper_number".tr);
+      return;
+    }
     var registerJson = await _apiClient.put(
         path: ApiConst.wsRegisteruser,
         formData: {ApiConst.mobileno: numberController.text});
@@ -30,17 +36,11 @@ class LogInController extends GetxController {
           UserDetails userDetails = UserDetails.fromJson(loginJson);
           await GetStorage()
               .write(DbKeys.userId, userDetails.data?.first.idUser);
-          DialogUtil.verifiedDialog();
+          // DialogUtil.verifiedDialog();
+          Get.until((route) => route.settings.name == RouteList.homePage);
+          Get.toNamed(RouteList.postGrievancePage);
         }
       }
-    }
-  }
-
-  void isValidCheck() {
-    if (numberController.text.trim().length == 10 && isValid.isFalse) {
-      isValid(true);
-    } else if (isValid.isTrue) {
-      isValid(false);
     }
   }
 }

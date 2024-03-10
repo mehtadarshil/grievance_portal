@@ -6,6 +6,7 @@ import 'package:grievance_portal/presentation/pages/grievance_list_page/full_scr
 import 'package:grievance_portal/presentation/pages/grievance_list_page/re_open_grievance.dart';
 import 'package:grievance_portal/presentation/pages/grievance_list_page/send_message_page.dart';
 import 'package:grievance_portal/presentation/pages/grievance_list_page/your_feedback_page.dart';
+import 'package:grievance_portal/presentation/widgets/blinking_text.dart';
 import 'package:grievance_portal/presentation/widgets/common_appbar.dart';
 import 'package:grievance_portal/presentation/widgets/common_button.dart';
 import 'package:grievance_portal/utils/appcolors.dart';
@@ -17,132 +18,205 @@ class GrievanceListPage extends GetView<GrievanceListController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppbar(title: "Grievance_List".tr),
+      appBar: CommonAppbar(
+        title: "Grievance_List".tr,
+        actions: [
+          TextButton(
+              onPressed: () {
+                controller.getGrievanceList();
+              },
+              child: Text("refresh".tr))
+        ],
+      ),
       body: Column(
         children: [
           Expanded(
             child: Obx(
               () {
                 if (controller.grievanceDetails.value != null) {
-                  List<DataRow> data = [];
+                  List<TableRow> data = [];
                   for (var i = 0;
                       i < controller.grievanceDetails.value!.data!.length;
                       i++) {
                     var detail = controller.grievanceDetails.value!.data![i];
-                    data.add(DataRow(cells: [
-                      DataCell(Text(
-                        (i + 1).toString(),
-                        style: TextStyle(
-                            fontFamily: FontFamily.urbanistMedium,
-                            fontSize: 12,
-                            color: AppColors.textColor),
-                      )),
-                      DataCell(Text(
+                    data.add(TableRow(children: [
+                      // Text(
+                      //   (i + 1).toString(),
+                      //   style: TextStyle(
+                      //       fontFamily: FontFamily.urbanistMedium,
+                      //       fontSize: 12,
+                      //       color: AppColors.textColor),
+                      // ),
+                      Text(
                         detail.uniqueRequestId ?? "",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             fontFamily: FontFamily.urbanistMedium,
                             fontSize: 12,
                             color: AppColors.textColor),
-                      )),
-                      DataCell(SizedBox(
-                        width: 130,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              if (detail.requestFileArray!.isNotEmpty)
-                                GestureDetector(
-                                  onTap: () {
-                                    Get.to(() => FullScreenImageViewer(
-                                        url: detail.requestFileArray!.first
-                                            .requestImagePath!
-                                            .replaceAll(" ", "")));
-                                  },
-                                  child: Image.network(
-                                    detail.requestFileArray!.first
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (detail.requestFileArray!.isNotEmpty)
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(() => FullScreenImageViewer(
+                                    url: detail.requestFileArray!.first
                                         .requestImagePath!
-                                        .replaceAll(" ", ""),
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Text(
-                                        "Failed To Load Image",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontFamily: FontFamily.urbanistBold,
-                                            color: AppColors.primaryRedColor),
-                                      );
-                                    },
-                                    height: 50,
-                                    width: 50,
-                                  ),
-                                ).paddingOnly(top: 10, bottom: 10),
-                              if (detail.requestDescription != null)
-                                Text.rich(TextSpan(children: [
-                                  TextSpan(
-                                    text: "Description: ",
+                                        .replaceAll(" ", "")));
+                              },
+                              child: Image.network(
+                                detail.requestFileArray!.first.requestImagePath!
+                                    .replaceAll(" ", ""),
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Text(
+                                    "Failed To Load Image",
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontFamily: FontFamily.urbanistBold,
-                                        fontSize: 12,
-                                        color: AppColors.textColor),
-                                  ),
-                                  TextSpan(
-                                    text: detail.requestDescription ?? "",
-                                    style: TextStyle(
-                                        fontFamily: FontFamily.urbanistMedium,
-                                        fontSize: 12,
-                                        color: AppColors.textColor),
-                                  )
-                                ])).paddingOnly(bottom: 10),
-                              if (detail.departmentNames != null)
-                                Text.rich(TextSpan(children: [
-                                  TextSpan(
-                                    text: "Department: ",
-                                    style: TextStyle(
-                                        fontFamily: FontFamily.urbanistBold,
-                                        fontSize: 12,
-                                        color: AppColors.textColor),
-                                  ),
-                                  TextSpan(
-                                    text: detail.departmentNames ?? "",
-                                    style: TextStyle(
-                                        fontFamily: FontFamily.urbanistMedium,
-                                        fontSize: 12,
-                                        color: AppColors.textColor),
-                                  )
-                                ])).paddingOnly(bottom: 10),
-                              if (detail.createdOn != null)
-                                Text.rich(TextSpan(children: [
-                                  TextSpan(
-                                    text: "Date Created: ",
-                                    style: TextStyle(
-                                        fontFamily: FontFamily.urbanistBold,
-                                        fontSize: 12,
-                                        color: AppColors.textColor),
-                                  ),
-                                  TextSpan(
-                                    text: DateFormat("dd MMM,yyyy hh:mm:aa")
-                                        .format(detail.createdOn!),
-                                    style: TextStyle(
-                                        fontFamily: FontFamily.urbanistMedium,
-                                        fontSize: 12,
-                                        color: AppColors.textColor),
-                                  )
-                                ])).paddingOnly(bottom: 10),
-                            ],
+                                        color: AppColors.primaryRedColor),
+                                  );
+                                },
+                                height: 50,
+                                width: 50,
+                              ),
+                            ).paddingOnly(top: 10, bottom: 10),
+                          if (detail.requestDescription != null)
+                            Text.rich(TextSpan(children: [
+                              TextSpan(
+                                text: "Description: ",
+                                style: TextStyle(
+                                    fontFamily: FontFamily.urbanistBold,
+                                    fontSize: 12,
+                                    color: AppColors.textColor),
+                              ),
+                              TextSpan(
+                                text: detail.requestDescription ?? "",
+                                style: TextStyle(
+                                    fontFamily: FontFamily.urbanistMedium,
+                                    fontSize: 12,
+                                    color: AppColors.textColor),
+                              )
+                            ])).paddingOnly(bottom: 10),
+                          if (detail.departmentNames != null)
+                            Text.rich(TextSpan(children: [
+                              TextSpan(
+                                text: "Department: ",
+                                style: TextStyle(
+                                    fontFamily: FontFamily.urbanistBold,
+                                    fontSize: 12,
+                                    color: AppColors.textColor),
+                              ),
+                              TextSpan(
+                                text: detail.departmentNames ?? "",
+                                style: TextStyle(
+                                    fontFamily: FontFamily.urbanistMedium,
+                                    fontSize: 12,
+                                    color: AppColors.textColor),
+                              )
+                            ])).paddingOnly(bottom: 10),
+                          if (detail.createdOn != null)
+                            Text.rich(TextSpan(children: [
+                              TextSpan(
+                                text: "Date Created: ",
+                                style: TextStyle(
+                                    fontFamily: FontFamily.urbanistBold,
+                                    fontSize: 12,
+                                    color: AppColors.textColor),
+                              ),
+                              TextSpan(
+                                text: DateFormat("dd MMM,yyyy hh:mm:aa")
+                                    .format(detail.createdOn!),
+                                style: TextStyle(
+                                    fontFamily: FontFamily.urbanistMedium,
+                                    fontSize: 12,
+                                    color: AppColors.textColor),
+                              )
+                            ])).paddingOnly(bottom: 10),
+                          SizedBox(
+                            height: 30,
+                            child: CommonButton(
+                                fontSize: 10,
+                                onTap: () {
+                                  controller.getDetailedGrievence(
+                                      grievenceId: detail.idRequest!);
+                                },
+                                maxlines: 2,
+                                color: AppColors.primaryRedColor,
+                                text: "View Details"),
                           ),
-                        ),
-                      )),
-                      DataCell(
-                          /* detail.requestStatus == "1"
-                          ? Text(
-                              detail.status ?? "",
-                              style: TextStyle(
-                                  fontFamily: FontFamily.urbanistMedium,
-                                  fontSize: 12,
-                                  color: AppColors.textColor),
+                          if (detail.latestRequestEmailstatusArray!.isNotEmpty)
+                            SizedBox(
+                              height: 30,
+                              child: CommonButton(
+                                      fontSize: 10,
+                                      onTap: () {
+                                        Get.to(() => const SendMessagePage(),
+                                                arguments: detail.idRequest)!
+                                            .then((value) {
+                                          controller.getGrievanceList();
+                                        });
+                                      },
+                                      maxlines: 2,
+                                      color: detail
+                                                  .latestRequestEmailstatusArray
+                                                  ?.first
+                                                  .emailRespondUserStatus ==
+                                              ""
+                                          ? AppColors.primaryRedColor
+                                          : AppColors.greenColor,
+                                      text: detail
+                                                  .latestRequestEmailstatusArray
+                                                  ?.first
+                                                  .emailRespondUserStatus ==
+                                              ""
+                                          ? "Respond"
+                                          : "Responded")
+                                  .paddingOnly(top: 5),
+                            ),
+                          if (detail.requestStatus == "2" ||
+                              detail.requestStatus == "3")
+                            Column(
+                              children: [
+                                SizedBox(
+                                  height: 30,
+                                  child: CommonButton(
+                                    text: "ReOpen",
+                                    color: AppColors.primaryRedColor,
+                                    fontSize: 10,
+                                    onTap: () {
+                                      Get.to(() => const ReOpenGrievance(),
+                                              arguments: detail)!
+                                          .then((value) {
+                                        controller.getGrievanceList();
+                                      });
+                                    },
+                                    maxlines: 2,
+                                  ).paddingOnly(top: 5),
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                  child: CommonButton(
+                                    text: "Your Feedback",
+                                    color: AppColors.primaryBlueColor,
+                                    fontSize: 10,
+                                    onTap: () {
+                                      Get.to(() => const YourFeedBackPage(),
+                                              arguments: detail)!
+                                          .then((value) {
+                                        controller.getGrievanceList();
+                                      });
+                                    },
+                                    maxlines: 2,
+                                  ).paddingOnly(top: 5),
+                                )
+                              ],
                             )
-                          : */
-                          Column(
+                        ],
+                      ).paddingSymmetric(vertical: 5),
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
@@ -153,7 +227,6 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                                 color: AppColors.textColor),
                           ).paddingOnly(bottom: 5),
                           SizedBox(
-                            width: 110,
                             height: 32,
                             child: CommonButton(
                                 fontSize: 10,
@@ -165,172 +238,112 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                                 text: "View All Updates"),
                           ),
                         ],
-                      )),
-                      DataCell(Center(
-                        child: SizedBox(
-                          width: 75,
-                          height: 32,
-                          child: detail.requestEmailstatusArray!.isNotEmpty
-                              ? CommonButton(
-                                  fontSize: 10,
-                                  onTap: () {
-                                    controller.getGrievenceEmailHistory(
-                                        grievenceId: detail.idRequest!);
-                                  },
-                                  maxlines: 2,
-                                  color: AppColors.primaryRedColor,
-                                  text: "View All Messages")
-                              : null,
-                        ),
-                      )),
-                      DataCell(
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: 100,
-                              height: 20,
-                              child: CommonButton(
-                                  fontSize: 10,
-                                  onTap: () {
-                                    controller.getDetailedGrievence(
-                                        grievenceId: detail.idRequest!);
-                                  },
-                                  maxlines: 2,
-                                  color: AppColors.primaryRedColor,
-                                  text: "View Details"),
-                            ),
-                            if (detail
-                                .latestRequestEmailstatusArray!.isNotEmpty)
-                              SizedBox(
-                                width: 90,
-                                height: 20,
-                                child: CommonButton(
-                                    fontSize: 10,
-                                    onTap: () {
-                                      Get.to(() => const SendMessagePage(),
-                                              arguments: detail.idRequest)!
-                                          .then((value) {
-                                        controller.getGrievanceList();
-                                      });
-                                    },
-                                    maxlines: 2,
-                                    color: detail.latestRequestEmailstatusArray
-                                                ?.first.idEmailHistory ==
-                                            "10"
-                                        ? AppColors.primaryRedColor
-                                        : AppColors.primaryBlueColor,
-                                    text: detail.latestRequestEmailstatusArray
-                                                ?.first.idEmailHistory ==
-                                            "10"
-                                        ? "Respond"
-                                        : "Responded"),
-                              ).paddingOnly(top: 5),
-                            if (detail.requestStatus == "2" ||
-                                detail.requestStatus == "3")
-                              Column(
-                                children: [
-                                  SizedBox(
-                                    width: 90,
-                                    height: 20,
-                                    child: CommonButton(
-                                      text: "ReOpen",
-                                      color: AppColors.primaryRedColor,
-                                      fontSize: 10,
-                                      onTap: () {
-                                        Get.to(() => const ReOpenGrievance(),
-                                                arguments: detail)!
-                                            .then((value) {
-                                          controller.getGrievanceList();
-                                        });
-                                      },
-                                      maxlines: 2,
-                                    ),
-                                  ).paddingOnly(top: 5),
-                                  SizedBox(
-                                    width: 110,
-                                    height: 20,
-                                    child: CommonButton(
-                                      text: "Your Feedback",
-                                      color: AppColors.primaryBlueColor,
-                                      fontSize: 10,
-                                      onTap: () {
-                                        Get.to(() => const YourFeedBackPage(),
-                                                arguments: detail)!
-                                            .then((value) {
-                                          controller.getGrievanceList();
-                                        });
-                                      },
-                                      maxlines: 2,
-                                    ),
-                                  ).paddingOnly(top: 5)
-                                ],
-                              )
-                          ],
-                        ),
                       ),
+                      detail.requestEmailstatusArray!.isNotEmpty
+                          ? Column(
+                              children: [
+                                detail.latestRequestEmailstatusArray?.first
+                                            .emailRespondUserStatus ==
+                                        ""
+                                    ? BlinkingText(
+                                        text: "new_message".tr,
+                                      ).paddingOnly(bottom: 8)
+                                    : const SizedBox.shrink(),
+                                SizedBox(
+                                  height: 32,
+                                  child: CommonButton(
+                                      fontSize: 9,
+                                      onTap: () {
+                                        controller.getGrievenceEmailHistory(
+                                            grievenceId: detail.idRequest!);
+                                      },
+                                      maxlines: 2,
+                                      color: AppColors.primaryRedColor,
+                                      text: "View All Messages"),
+                                ),
+                              ],
+                            ).paddingSymmetric(vertical: 5, horizontal: 5)
+                          : const SizedBox.shrink(),
+                      // Column(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+
+                      //   ],
+                      // ).paddingSymmetric(horizontal: 5, vertical: 5),
                     ]));
                   }
                   return SingleChildScrollView(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: DataTable(
-                          headingRowHeight: 29,
-                          dataRowHeight: 120,
-                          columnSpacing: 20,
-                          headingRowColor:
-                              MaterialStatePropertyAll(AppColors.headerColor),
-                          columns: const [
-                            DataColumn(
-                                label: Text(
-                              "Si",
-                              style: TextStyle(
-                                fontFamily: FontFamily.urbanistMedium,
-                                fontSize: 12,
-                              ),
-                            )),
-                            DataColumn(
-                                label: Text(
-                              "Grievance ID",
-                              style: TextStyle(
-                                fontFamily: FontFamily.urbanistMedium,
-                                fontSize: 12,
-                              ),
-                            )),
-                            DataColumn(
-                                label: Text(
-                              "Details",
-                              style: TextStyle(
-                                fontFamily: FontFamily.urbanistMedium,
-                                fontSize: 12,
-                              ),
-                            )),
-                            DataColumn(
-                                label: Text(
-                              "Status Updates",
-                              style: TextStyle(
-                                fontFamily: FontFamily.urbanistMedium,
-                                fontSize: 12,
-                              ),
-                            )),
-                            DataColumn(
-                                label: Text(
-                              "Message Updates",
-                              style: TextStyle(
-                                fontFamily: FontFamily.urbanistMedium,
-                                fontSize: 12,
-                              ),
-                            )),
-                            DataColumn(
-                                label: Text(
-                              "Action",
-                              style: TextStyle(
-                                fontFamily: FontFamily.urbanistMedium,
-                                fontSize: 12,
-                              ),
-                            )),
-                          ],
-                          rows: data),
+                    child: Table(
+                      columnWidths: const {
+                        0: FlexColumnWidth(1),
+                        1: FlexColumnWidth(1.8),
+                        2: FlexColumnWidth(1),
+                        3: FlexColumnWidth(1),
+                        4: FlexColumnWidth(1),
+                      },
+                      border: TableBorder(
+                          horizontalInside: BorderSide(
+                              color: AppColors.blackColor, width: 0.5)),
+                      // headingRowHeight: 29,
+                      // dataRowHeight: 120,
+                      // columnSpacing: 20,
+                      // headingRowColor:
+                      //     MaterialStatePropertyAll(AppColors.headerColor),
+                      children: [
+                        TableRow(
+                            decoration:
+                                BoxDecoration(color: AppColors.headerColor),
+                            children: [
+                              // Text(
+                              //   "Si",
+                              //   style: TextStyle(
+                              //     fontFamily: FontFamily.urbanistMedium,
+                              //     fontSize: 12,
+                              //   ),
+                              // ),
+                              const Text(
+                                "Grievance ID",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: FontFamily.urbanistMedium,
+                                  fontSize: 12,
+                                ),
+                              ).paddingSymmetric(vertical: 5),
+                              const Text(
+                                "Details",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: FontFamily.urbanistMedium,
+                                  fontSize: 12,
+                                ),
+                              ).paddingSymmetric(vertical: 5),
+                              const Text(
+                                "Status Updates",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: FontFamily.urbanistMedium,
+                                  fontSize: 12,
+                                ),
+                              ).paddingSymmetric(vertical: 5),
+                              const Text(
+                                "Message Updates",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: FontFamily.urbanistMedium,
+                                  fontSize: 12,
+                                ),
+                              ).paddingSymmetric(vertical: 5),
+                              // const Text(
+                              //   "Action",
+                              //   textAlign: TextAlign.center,
+                              //   style: TextStyle(
+                              //     fontFamily: FontFamily.urbanistMedium,
+                              //     fontSize: 12,
+                              //   ),
+                              // ).paddingSymmetric(vertical: 5),
+                            ]),
+                        ...data
+                      ],
                     ),
                   );
                 } else {
