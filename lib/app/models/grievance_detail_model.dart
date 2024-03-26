@@ -58,6 +58,7 @@ class Datum {
   final String? departmentNames;
   final String? customerName;
   final String? address;
+  final num? totalReopened;
   final List<RequestStatusArray>? requestStatusArray;
   final List<LatestRequestEmailstatusArray>? latestRequestEmailstatusArray;
   final List<RequestEmailstatusArray>? requestEmailstatusArray;
@@ -77,6 +78,7 @@ class Datum {
     this.departmentNames,
     this.customerName,
     this.address,
+    this.totalReopened,
     this.requestStatusArray,
     this.latestRequestEmailstatusArray,
     this.requestEmailstatusArray,
@@ -103,6 +105,7 @@ class Datum {
         departmentNames: json["department_names"],
         customerName: json["customer_name"],
         address: json["address"],
+        totalReopened: json["total_reopened"],
         requestStatusArray: json["request_status_array"] == null
             ? []
             : List<RequestStatusArray>.from(json["request_status_array"]!
@@ -138,6 +141,7 @@ class Datum {
         "department_names": departmentNames,
         "customer_name": customerName,
         "address": address,
+        "total_reopened": totalReopened,
         "request_status_array": requestStatusArray == null
             ? []
             : List<dynamic>.from(requestStatusArray!.map((x) => x.toJson())),

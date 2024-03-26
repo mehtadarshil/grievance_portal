@@ -60,7 +60,7 @@ class DashboardPage extends GetView<DashboardController> {
               onTap: () {
                 Get.toNamed(RouteList.grievanceListPage);
               },
-              title: "Track_Grievance".tr,
+              title: "Grievance_List".tr,
               image: Assets.images.key,
               color: AppColors.thirdCardColor,
             ),

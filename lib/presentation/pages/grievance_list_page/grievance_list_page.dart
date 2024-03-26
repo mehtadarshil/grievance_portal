@@ -180,38 +180,44 @@ class GrievanceListPage extends GetView<GrievanceListController> {
                               detail.requestStatus == "3")
                             Column(
                               children: [
-                                SizedBox(
-                                  height: 30,
-                                  child: CommonButton(
-                                    text: "ReOpen",
-                                    color: AppColors.primaryRedColor,
-                                    fontSize: 10,
-                                    onTap: () {
-                                      Get.to(() => const ReOpenGrievance(),
-                                              arguments: detail)!
-                                          .then((value) {
-                                        controller.getGrievanceList();
-                                      });
-                                    },
-                                    maxlines: 2,
-                                  ).paddingOnly(top: 5),
-                                ),
-                                SizedBox(
-                                  height: 30,
-                                  child: CommonButton(
-                                    text: "Your Feedback",
-                                    color: AppColors.primaryBlueColor,
-                                    fontSize: 10,
-                                    onTap: () {
-                                      Get.to(() => const YourFeedBackPage(),
-                                              arguments: detail)!
-                                          .then((value) {
-                                        controller.getGrievanceList();
-                                      });
-                                    },
-                                    maxlines: 2,
-                                  ).paddingOnly(top: 5),
-                                )
+                                detail.totalReopened != null &&
+                                        detail.totalReopened! < 1
+                                    ? SizedBox(
+                                        height: 30,
+                                        child: CommonButton(
+                                          text: "ReOpen",
+                                          color: AppColors.primaryRedColor,
+                                          fontSize: 10,
+                                          onTap: () {
+                                            Get.to(
+                                                    () =>
+                                                        const ReOpenGrievance(),
+                                                    arguments: detail)!
+                                                .then((value) {
+                                              controller.getGrievanceList();
+                                            });
+                                          },
+                                          maxlines: 2,
+                                        ).paddingOnly(top: 5),
+                                      )
+                                    : SizedBox(
+                                        height: 30,
+                                        child: CommonButton(
+                                          text: "Your Feedback",
+                                          color: AppColors.primaryBlueColor,
+                                          fontSize: 10,
+                                          onTap: () {
+                                            Get.to(
+                                                    () =>
+                                                        const YourFeedBackPage(),
+                                                    arguments: detail)!
+                                                .then((value) {
+                                              controller.getGrievanceList();
+                                            });
+                                          },
+                                          maxlines: 2,
+                                        ).paddingOnly(top: 5),
+                                      )
                               ],
                             )
                         ],

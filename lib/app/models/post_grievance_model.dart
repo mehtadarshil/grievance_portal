@@ -49,7 +49,7 @@ class Data {
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        grievanceId: json["grievance_id"],
+        grievanceId: json["grievance_id"]?.toString(),
       );
 
   Map<String, dynamic> toJson() => {
